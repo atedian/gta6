@@ -1,54 +1,23 @@
 # Costa Sur · Generador de Prompts Tropical 80s / 90s
 
-Aplicación web estática en un único archivo (`index.html`, sin dependencias externas) con portada atmosférica con parallax por scroll y estudio interactivo para construir prompts en tiempo real orientados a transformar fotografías o ilustrar miniaturas desde cero.
+Herramienta web para crear prompts listos para usar en generadores de imágenes (como ChatGPT o Gemini), pensada para transformar fotografías o ilustrar escenas y miniaturas con estética tropical nocturna de los años 80 y 90.
 
-- **Repo:** https://github.com/atedian/gta6
-- **En vivo (GitHub Pages):** https://atedian.github.io/gta6/
+**[Abrir la web en vivo](https://atedian.github.io/gta6/)**
 
-Los cambios en esta carpeta se publican solos: un agente `launchd`
-(`com.atedian.gta6.autosync`, script `~/.hermes/scripts/gta6-autosync.sh`) hace
-commit y push a `main` unos segundos después de cada guardado, y Pages reconstruye
-la web. Log: `~/Library/Logs/atedian-gta6-autosync.log`.
+## Cómo funciona
 
-## Características
+1. **Elige el modo de creación:**
+   - **Transformar mi foto:** conserva reconocibles las facciones, el peinado, la expresión y el tono de piel de la imagen que adjuntes, reinterpretándola como ilustración digital pintada a mano con contornos definidos y sombras gráficas.
+   - **Crear imagen desde cero:** genera la escena completa sin necesitar ninguna fotografía de referencia.
+2. **Personaliza la escena:**
+   - **Protagonista / Acción:** describe vestimenta, pose o expresión (incluye un ejemplo editable).
+   - **Escenario de fondo:** paseo marítimo con palmeras al atardecer, calle con hoteles Art Déco y neón, deportivo clásico junto a la playa o azotea frente al skyline costero.
+   - **Paleta y luz:** atardecer coral y magenta, noche de neón turquesa y violeta o sol tropical vibrante de mediodía.
+   - **Formato y composición:** `16:9` para miniatura (sujeto en el tercio derecho y zona despejada a la izquierda para título), `9:16` vertical o `1:1` cuadrado.
+3. **Copia y genera:**
+   - El panel derecho actualiza el prompt y el monitor de encuadre al instante con cada cambio.
+   - Pulsa **Copiar prompt**, abre **ChatGPT** o **Gemini** desde los accesos directos (adjuntando tu foto si elegiste *Transformar mi foto*), pega el texto y genera la imagen.
 
-- **100 % estática y sin dependencias:** HTML, CSS y JavaScript integrados en `index.html`; se ejecuta completamente en el navegador.
-- **Portada editorial con profundidad:** Escena nocturna costera con parallax nativo en CSS (`animation-timeline: view()`) y respaldo con `IntersectionObserver` + respeto a `prefers-reduced-motion`.
-- **Actualización y monitor de encuadre en tiempo real:** Cada cambio en modo, protagonista/acción, escenario, paleta o formato regenera el prompt y actualiza la vista previa de composición (`16:9`, `9:16` o `1:1`).
-- **Dos modos de creación:**
-  - *Transformar mi foto:* mantiene reconocibles facciones, peinado, expresión y tono de piel como ilustración digital pintada a mano.
-  - *Crear imagen desde cero:* genera la escena completa sin mencionar fotografías adjuntas.
-- **Accesos rápidos y portapapeles:** Botón de copia con API moderna (`navigator.clipboard.writeText`) y respaldo seleccionando el texto, más accesos directos a ChatGPT y Gemini.
-- **Diseño adaptable y accesible:** Dos columnas en escritorio con consola fija a la derecha, una columna en móvil sin desbordamiento desde `360px`, alto contraste y soporte completo de teclado y lectores de pantalla.
+## Ejecución local
 
-## Uso local
-
-Abre `index.html` directamente en cualquier navegador moderno o inicia un servidor local estático:
-
-```sh
-python3 -m http.server 8080
-```
-
-## Publicación en GitHub (`atedian`) y GitHub Pages
-
-Este repositorio está preparado para servirse directamente desde la raíz (`index.html` + `.nojekyll`) con **GitHub Pages**.
-
-1. Cambia a la cuenta `atedian` (si usas `gh` CLI) o crea el repositorio en GitHub bajo `https://github.com/atedian`:
-
-   ```sh
-   gh auth switch --user atedian
-   gh repo create atedian/gta6 --public --source=. --remote=origin --push
-   ```
-
-   *(Si prefieres crear el repositorio desde la web de GitHub, enlaza el remoto manualmente:)*
-
-   ```sh
-   git remote add origin https://github.com/atedian/<nombre-repo>.git
-   git push -u origin main
-   ```
-
-2. Activa **GitHub Pages** para usar la web directamente desde el repositorio:
-   - En GitHub, entra en **Settings → Pages**.
-   - En **Build and deployment → Source**, elige **Deploy from a branch**.
-   - Selecciona la rama **`main`** y la carpeta **`/ (root)`**, y pulsa **Save**.
-   - En ~1 minuto la aplicación estará disponible en `https://atedian.github.io/<nombre-repo>/`.
+Todo el proyecto vive en [`index.html`](index.html) sin dependencias externas ni paso de compilación: basta con abrir ese archivo en cualquier navegador moderno.
