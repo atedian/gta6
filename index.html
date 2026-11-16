@@ -152,9 +152,9 @@
 
     .cover-sun {
       position: absolute;
-      inset-inline-start: 66%;
+      inset-inline-start: 50%;
       inset-block-end: 16%;
-      inline-size: clamp(15rem, 38vw, 30rem);
+      inline-size: clamp(16rem, 40vw, 31rem);
       aspect-ratio: 1;
       transform: translate3d(-50%, 0, 0);
       border-radius: 50%;
@@ -176,8 +176,7 @@
 
     @media (min-width: 54rem) {
       .cover-sun {
-        inset-inline-start: 68%;
-        opacity: 0.72;
+        opacity: 0.62;
       }
     }
 
@@ -213,9 +212,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(9, 7, 15, 0.72) 0%, rgba(9, 7, 15, 0.32) 55%, transparent 85%),
-        linear-gradient(180deg, rgba(9, 7, 15, 0.48) 0%, transparent 28%, rgba(13, 11, 20, 0.45) 75%, #0d0b14 100%),
-        radial-gradient(90% 80% at 50% 45%, transparent 45%, rgba(7, 5, 12, 0.65) 100%);
+        radial-gradient(64% 58% at 50% 48%, rgba(9, 7, 15, 0.52) 0%, rgba(9, 7, 15, 0.25) 58%, rgba(7, 5, 12, 0.72) 100%),
+        linear-gradient(180deg, rgba(9, 7, 15, 0.48) 0%, transparent 28%, rgba(13, 11, 20, 0.45) 75%, #0d0b14 100%);
     }
 
     /* Scroll-driven parallax (compositor-only, progressive enhancement) */
@@ -288,7 +286,8 @@
       padding-inline: clamp(1rem, 3vw, 2.5rem);
       display: grid;
       align-content: center;
-      justify-items: start;
+      justify-items: center;
+      text-align: center;
       gap: 1rem;
       will-change: transform, opacity;
     }
@@ -329,6 +328,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       gap: 0.85rem 1.4rem;
     }
 
@@ -355,15 +355,6 @@
       background: var(--cyan);
       color: var(--ink-dark);
       transform: translateY(-1px);
-    }
-
-    .cover-specs {
-      margin: 0;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
     }
 
     .cover-horizon-bar {
@@ -1333,7 +1324,7 @@
 
       @media (min-width: 54rem) {
         .cover-sun {
-          opacity: 0.72 !important;
+          opacity: 0.62 !important;
         }
       }
 
@@ -1425,7 +1416,6 @@
             <path d="M12 5v14M5 12l7 7 7-7"/>
           </svg>
         </a>
-        <p class="cover-specs">4 locaciones, 3 atmósferas y 3 formatos</p>
       </div>
     </div>
 
