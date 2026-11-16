@@ -1,16 +1,25 @@
-# Generador de Prompts · Miami Nocturno 80s / 90s
+# Costa Sur · Generador de Prompts Tropical 80s / 90s
 
-Aplicación web estática en un único archivo (`index.html`, sin dependencias externas) para construir prompts en tiempo real orientados a transformar fotografías o crear ilustraciones y miniaturas desde cero con estética tropical nocturna de los años 80 y 90.
+Aplicación web estática en un único archivo (`index.html`, sin dependencias externas) con portada atmosférica con parallax por scroll y estudio interactivo para construir prompts en tiempo real orientados a transformar fotografías o ilustrar miniaturas desde cero.
+
+- **Repo:** https://github.com/atedian/gta6
+- **En vivo (GitHub Pages):** https://atedian.github.io/gta6/
+
+Los cambios en esta carpeta se publican solos: un agente `launchd`
+(`com.atedian.gta6.autosync`, script `~/.hermes/scripts/gta6-autosync.sh`) hace
+commit y push a `main` unos segundos después de cada guardado, y Pages reconstruye
+la web. Log: `~/Library/Logs/atedian-gta6-autosync.log`.
 
 ## Características
 
 - **100 % estática y sin dependencias:** HTML, CSS y JavaScript integrados en `index.html`; se ejecuta completamente en el navegador.
-- **Actualización en tiempo real:** Cada cambio en modo, protagonista/acción, escenario, paleta o formato regenera el prompt automáticamente.
+- **Portada editorial con profundidad:** Escena nocturna costera con parallax nativo en CSS (`animation-timeline: view()`) y respaldo con `IntersectionObserver` + respeto a `prefers-reduced-motion`.
+- **Actualización y monitor de encuadre en tiempo real:** Cada cambio en modo, protagonista/acción, escenario, paleta o formato regenera el prompt y actualiza la vista previa de composición (`16:9`, `9:16` o `1:1`).
 - **Dos modos de creación:**
   - *Transformar mi foto:* mantiene reconocibles facciones, peinado, expresión y tono de piel como ilustración digital pintada a mano.
   - *Crear imagen desde cero:* genera la escena completa sin mencionar fotografías adjuntas.
 - **Accesos rápidos y portapapeles:** Botón de copia con API moderna (`navigator.clipboard.writeText`) y respaldo seleccionando el texto, más accesos directos a ChatGPT y Gemini.
-- **Diseño adaptable y accesible:** Dos columnas en escritorio con resultado fijo, una columna en móvil sin desbordamiento desde `360px`, alto contraste y soporte para teclado y lectores de pantalla.
+- **Diseño adaptable y accesible:** Dos columnas en escritorio con consola fija a la derecha, una columna en móvil sin desbordamiento desde `360px`, alto contraste y soporte completo de teclado y lectores de pantalla.
 
 ## Uso local
 
