@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark">
-  <title>Costa Sur · Generador de Prompts Tropical 80s/90s</title>
+  <title>Noches de Miami · Generador de Prompts 80s/90s</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%230d0b14'/%3E%3Ccircle cx='24' cy='22' r='13' fill='%23ff4e79'/%3E%3Cpath d='M9 25h30M11 29h26M14 33h20' stroke='%230d0b14' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M23 40c0-7 2-14 6-19M29 21c-4-1-8 0-11 2M29 21c4-1 7 1 10 4M29 21c1-4 4-6 8-7M29 21c-2-4-5-6-9-6M6 40h36' stroke='%2300f0ff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
   <style>
     :root {
@@ -16,7 +16,7 @@
       --surface-well: #09070f;
       --surface-hover: #1e1631;
       --hairline: rgba(255, 255, 255, 0.13);
-      --hairline-strong: rgba(255, 255, 255, 0.28);
+      --hairline-strong: rgba(255, 255, 255, 0.26);
       --border-field: #6e5999;
       --text-primary: #f6f2ff;
       --text-secondary: #cfc5e6;
@@ -65,15 +65,43 @@
       overflow-x: clip;
     }
 
-    .visually-hidden:where(:not(:focus-within, :active)) {
+    /* Always visually hidden — used for native radio inputs & screen-reader labels */
+    .sr-only {
       position: absolute !important;
-      clip-path: inset(50%) !important;
+      inline-size: 1px !important;
+      block-size: 1px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
       overflow: hidden !important;
-      width: 1px !important;
-      height: 1px !important;
+      clip-path: inset(50%) !important;
+      white-space: nowrap !important;
+    }
+
+    .sr-only-input {
+      position: absolute !important;
+      inline-size: 1px !important;
+      block-size: 1px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      overflow: hidden !important;
+      clip-path: inset(50%) !important;
+      white-space: nowrap !important;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    /* Skip link: hidden until focused */
+    .skip-link:where(:not(:focus-visible)) {
+      position: absolute !important;
+      inline-size: 1px !important;
+      block-size: 1px !important;
       margin: -1px !important;
       padding: 0 !important;
       border: 0 !important;
+      overflow: hidden !important;
+      clip-path: inset(50%) !important;
       white-space: nowrap !important;
     }
 
@@ -98,13 +126,13 @@
     }
 
     /* ================================================================
-       1. CINEMATIC COVER STAGE (Editorial full-bleed + parallax)
+       1. CINEMATIC COVER STAGE (No top navigation clutter)
        ================================================================ */
     .cover-stage {
       position: relative;
-      min-block-size: clamp(29rem, 78dvh, 48rem);
+      min-block-size: clamp(27rem, 78dvh, 46rem);
       display: grid;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: 1fr auto;
       overflow: clip;
       border-block-end: 1px solid var(--hairline);
       background:
@@ -186,7 +214,7 @@
       inset: 0;
       background:
         linear-gradient(90deg, rgba(9, 7, 15, 0.72) 0%, rgba(9, 7, 15, 0.32) 55%, transparent 85%),
-        linear-gradient(180deg, rgba(9, 7, 15, 0.55) 0%, transparent 28%, rgba(13, 11, 20, 0.45) 75%, #0d0b14 100%),
+        linear-gradient(180deg, rgba(9, 7, 15, 0.48) 0%, transparent 28%, rgba(13, 11, 20, 0.45) 75%, #0d0b14 100%),
         radial-gradient(90% 80% at 50% 45%, transparent 45%, rgba(7, 5, 12, 0.65) 100%);
     }
 
@@ -250,79 +278,13 @@
       }
     }
 
-    /* Top bar inside cover */
-    .topbar {
-      position: relative;
-      z-index: 2;
-      inline-size: 100%;
-      max-inline-size: 82rem;
-      margin-inline: auto;
-      padding-block: clamp(1rem, 2.2vw, 1.5rem);
-      padding-inline: clamp(1rem, 3vw, 2.5rem);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem 1.25rem;
-    }
-
-    .wordmark {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .wordmark-mark {
-      inline-size: 1.75rem;
-      block-size: 1.75rem;
-      display: block;
-      flex: none;
-    }
-
-    .topbar-nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem 1.25rem;
-    }
-
-    .nav-link {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      text-decoration: none;
-      min-block-size: 44px;
-      padding-inline: 0.25rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      border-block-end: 1px solid transparent;
-      transition: color 0.16s ease, border-color 0.16s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--cyan);
-      border-block-end-color: var(--cyan);
-    }
-
-    /* Cover centerpiece */
     .cover-center {
       position: relative;
       z-index: 2;
       inline-size: 100%;
       max-inline-size: 82rem;
       margin-inline: auto;
-      padding-block: clamp(1.5rem, 4vw, 3.25rem) clamp(2rem, 4vw, 3.5rem);
+      padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 5vw, 4rem);
       padding-inline: clamp(1rem, 3vw, 2.5rem);
       display: grid;
       align-content: center;
@@ -344,7 +306,7 @@
     .cover-title {
       margin: 0;
       font-family: var(--font-display);
-      font-size: clamp(2.35rem, 1.4rem + 4.4vw, 5.25rem);
+      font-size: clamp(2.45rem, 1.45rem + 4.5vw, 5.35rem);
       font-weight: 900;
       line-height: 0.94;
       letter-spacing: -0.035em;
@@ -506,6 +468,7 @@
     }
 
     .field-group {
+      position: relative;
       min-inline-size: 0;
       inline-size: 100%;
       margin: 0;
@@ -513,7 +476,7 @@
       border: 0;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
 
     .field-group + .field-group {
@@ -584,11 +547,11 @@
     .segmented-control {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 0.4rem;
+      gap: 0.35rem;
       padding: 0.3rem;
       border-radius: var(--radius-sm);
       background: var(--surface-well);
-      border: 1px solid var(--border-field);
+      border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
     @media (min-width: 30rem) {
@@ -608,7 +571,7 @@
       justify-content: center;
       gap: 0.5rem;
       min-block-size: 48px;
-      padding: 0.6rem 0.85rem;
+      padding: 0.6rem 0.9rem;
       border-radius: 0.25rem;
       border: 1px solid transparent;
       font-size: 0.9375rem;
@@ -616,7 +579,16 @@
       text-align: center;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .segment-dot {
+      flex: none;
+      inline-size: 0.45rem;
+      block-size: 0.45rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+      transition: background-color 0.16s ease, box-shadow 0.16s ease;
     }
 
     .segment-label:hover {
@@ -626,8 +598,14 @@
 
     .segment-item input:checked + .segment-label {
       background: linear-gradient(135deg, rgba(255, 78, 121, 0.22), rgba(217, 56, 191, 0.2));
-      border-color: var(--coral);
+      border-color: rgba(255, 78, 121, 0.9);
       color: #ffffff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 18px -10px rgba(255, 78, 121, 0.55);
+    }
+
+    .segment-item input:checked + .segment-label .segment-dot {
+      background: var(--coral);
+      box-shadow: 0 0 8px var(--coral);
     }
 
     .segment-item input:focus-visible + .segment-label {
@@ -635,7 +613,7 @@
       outline-offset: 2px;
     }
 
-    /* Textarea & Selects */
+    /* Textarea & Selectors */
     .text-input,
     .select-input {
       inline-size: 100%;
@@ -645,9 +623,9 @@
       font-size: max(1rem, 1em);
       color: var(--text-primary);
       background-color: var(--surface-well);
-      border: 1px solid var(--border-field);
+      border: 1px solid rgba(138, 114, 189, 0.58);
       border-radius: var(--radius-sm);
-      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
     }
 
     .text-input {
@@ -667,7 +645,8 @@
 
     .text-input:hover,
     .select-input:hover {
-      border-color: #9e84d4;
+      border-color: rgba(0, 240, 255, 0.7);
+      background-color: #0e0a18;
     }
 
     .text-input:focus-visible,
@@ -677,19 +656,20 @@
     }
 
     .select-input {
-      min-block-size: 48px;
-      padding: 0.65rem 0.9rem;
+      min-block-size: 50px;
+      padding: 0.7rem 1rem;
+      font-weight: 500;
       cursor: pointer;
     }
 
     @supports not (appearance: base-select) {
       .select-input {
         appearance: none;
-        padding-inline-end: 2.75rem;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23f6f2ff' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E");
+        padding-inline-end: 2.85rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2300f0ff' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 0.85rem center;
-        background-size: 1.05rem;
+        background-position: right 0.95rem center;
+        background-size: 1.1rem;
         text-overflow: ellipsis;
       }
     }
@@ -706,36 +686,60 @@
         gap: 0.75rem;
         white-space: normal;
         text-align: start;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+
+      .select-input:open {
+        border-color: var(--cyan);
+        background-color: #120d20;
       }
 
       .select-input::picker-icon {
-        color: var(--text-secondary);
-        transition: transform 0.16s ease;
+        content: "";
+        flex: none;
+        inline-size: 1.125rem;
+        block-size: 1.125rem;
+        background-color: var(--cyan);
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+        transition: transform 0.18s ease;
       }
 
       .select-input:open::picker-icon {
         transform: rotate(180deg);
-        color: var(--cyan);
       }
 
       .select-input::picker(select) {
-        background-color: #140f20;
+        background-color: #130e1f;
         color: var(--text-primary);
-        border: 1px solid var(--border-field);
+        border: 1px solid rgba(0, 240, 255, 0.52);
         border-radius: var(--radius-sm);
         padding: 0.375rem;
-        margin-block-start: 0.3rem;
+        margin-block-start: 0.35rem;
+        min-inline-size: anchor-size(width);
         max-inline-size: min(calc(100dvw - 2rem), 34rem);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.88);
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.9), 0 0 24px -10px rgba(0, 240, 255, 0.32);
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.16s ease, transform 0.16s ease, display 0.16s allow-discrete, overlay 0.16s allow-discrete;
+      }
+
+      @starting-style {
+        .select-input::picker(select):popover-open {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
       }
 
       .select-input option {
-        padding: 0.65rem 0.75rem;
+        padding: 0.65rem 0.8rem;
         border-radius: 0.25rem;
         color: var(--text-primary);
         white-space: normal;
         line-height: 1.35;
+        gap: 0.6rem;
         cursor: pointer;
+        transition: background-color 0.12s ease;
       }
 
       .select-input option:hover,
@@ -744,12 +748,14 @@
       }
 
       .select-input option:checked {
-        background-color: rgba(255, 78, 121, 0.22);
+        background-color: rgba(255, 78, 121, 0.2);
+        color: #ffffff;
         font-weight: 600;
       }
 
       .select-input option::checkmark {
         color: var(--cyan);
+        font-weight: 700;
       }
     }
 
@@ -758,7 +764,7 @@
       display: flex;
       align-items: center;
       gap: 0.7rem;
-      padding: 0.4rem 0.65rem;
+      padding: 0.45rem 0.7rem;
       border-radius: var(--radius-sm);
       background: var(--surface-well);
       border: 1px solid var(--hairline);
@@ -799,24 +805,25 @@
     .ratio-label {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      min-block-size: 48px;
-      padding: 0.7rem 0.85rem;
+      gap: 0.85rem;
+      min-block-size: 52px;
+      padding: 0.75rem 0.9rem;
       border-radius: var(--radius-sm);
       background: var(--surface-well);
-      border: 1px solid var(--border-field);
+      border: 1px solid rgba(138, 114, 189, 0.52);
       cursor: pointer;
-      transition: border-color 0.16s ease, background-color 0.16s ease;
+      transition: border-color 0.16s ease, background-color 0.16s ease, box-shadow 0.16s ease;
     }
 
     .ratio-label:hover {
-      border-color: #a68de0;
+      border-color: rgba(0, 240, 255, 0.65);
       background: var(--surface-hover);
     }
 
     .ratio-item input:checked + .ratio-label {
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(217, 56, 191, 0.12));
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(217, 56, 191, 0.11));
       border-color: var(--cyan);
+      box-shadow: inset 0 1px 0 rgba(0, 240, 255, 0.18), 0 8px 20px -14px rgba(0, 240, 255, 0.45);
     }
 
     .ratio-item input:focus-visible + .ratio-label {
@@ -826,18 +833,20 @@
 
     .ratio-icon {
       flex: none;
-      inline-size: 2.25rem;
-      block-size: 2.25rem;
+      inline-size: 2.35rem;
+      block-size: 2.35rem;
       display: grid;
       place-items: center;
       border-radius: 0.25rem;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--hairline);
       color: var(--text-secondary);
+      transition: border-color 0.16s ease, color 0.16s ease, background-color 0.16s ease;
     }
 
     .ratio-item input:checked + .ratio-label .ratio-icon {
-      border-color: rgba(0, 240, 255, 0.6);
+      border-color: rgba(0, 240, 255, 0.65);
+      background: rgba(0, 240, 255, 0.08);
       color: var(--cyan);
     }
 
@@ -862,10 +871,10 @@
 
     .ratio-check {
       flex: none;
-      inline-size: 1.25rem;
-      block-size: 1.25rem;
+      inline-size: 1.35rem;
+      block-size: 1.35rem;
       border-radius: 50%;
-      border: 2px solid var(--border-field);
+      border: 1.5px solid rgba(166, 153, 199, 0.55);
       display: grid;
       place-items: center;
       color: transparent;
@@ -879,15 +888,14 @@
     }
 
     /* ================================================================
-       RIGHT COLUMN: LIVE CINEMA VIEWFINDER + PROMPT CONSOLE
+       RIGHT COLUMN: LIVE VIEWFINDER + PROMPT CONSOLE + AI TOOL DOCK
        ================================================================ */
     .output-stack {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 1rem;
+      gap: 0.95rem;
     }
 
-    /* Live Scene Viewfinder */
     .viewfinder-shell {
       position: relative;
       padding: 0.65rem;
@@ -1022,7 +1030,6 @@
       opacity: 1;
     }
 
-    /* Prompt output field */
     .prompt-field-wrap {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -1049,11 +1056,11 @@
       inline-size: 100%;
       max-inline-size: 100%;
       min-inline-size: 0;
-      min-block-size: 9.75rem;
-      max-block-size: clamp(9.75rem, 26dvh, 14.25rem);
+      min-block-size: 9.25rem;
+      max-block-size: clamp(9.25rem, 25dvh, 13.75rem);
       padding: 0.85rem 0.95rem;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border-field);
+      border: 1px solid rgba(138, 114, 189, 0.58);
       background: var(--surface-well);
       color: var(--text-primary);
       font-family: var(--font-sans);
@@ -1069,7 +1076,7 @@
       box-shadow: 0 0 0 1px var(--cyan);
     }
 
-    /* Copy action */
+    /* Copy CTA */
     .copy-block {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -1130,7 +1137,7 @@
     }
 
     .copy-status {
-      min-block-size: 1.6rem;
+      min-block-size: 1.5rem;
       padding: 0.2rem 0.65rem;
       border-radius: var(--radius-sm);
       font-family: var(--font-mono);
@@ -1166,44 +1173,58 @@
       border-color: rgba(255, 78, 121, 0.55);
     }
 
-    /* Quick-launch links */
-    .quick-links {
+    /* Universal AI image dock (low visual hierarchy, multi-tool) */
+    .ai-dock {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.75rem), 1fr));
-      gap: 0.625rem;
+      gap: 0.5rem;
+      padding-block-start: 0.7rem;
+      border-block-start: 1px solid var(--hairline);
     }
 
-    .btn-secondary {
-      min-block-size: 48px;
-      padding: 0.6rem 0.85rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-field);
-      background: var(--surface-well);
-      color: var(--text-primary);
+    .ai-dock-label {
+      margin: 0;
       font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .ai-dock-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .ai-chip {
+      min-inline-size: 44px;
+      min-block-size: 44px;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--hairline);
+      background: var(--surface-well);
+      color: var(--text-secondary);
       text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      text-align: center;
-      transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+      gap: 0.4rem;
+      transition: border-color 0.16s ease, color 0.16s ease, background-color 0.16s ease;
     }
 
-    .btn-secondary:hover {
+    .ai-chip:hover {
       border-color: var(--cyan);
       background: var(--surface-hover);
       color: var(--cyan);
     }
 
-    .btn-secondary svg {
-      flex: none;
+    .ai-chip svg {
       inline-size: 0.95rem;
       block-size: 0.95rem;
+      flex: none;
     }
 
     /* 3-step guide */
@@ -1215,7 +1236,7 @@
     .steps-title {
       margin: 0 0 0.45rem;
       font-family: var(--font-mono);
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -1236,36 +1257,72 @@
       font-weight: 700;
     }
 
-    /* Editorial Colophon */
-    .colophon {
+    /* ================================================================
+       FOOTER: Atedian + modern social & web icons only
+       ================================================================ */
+    .site-footer {
       inline-size: 100%;
       max-inline-size: 82rem;
       margin-inline: auto;
-      padding-block: 1.25rem 2rem;
+      padding-block: 1.35rem 2.25rem;
       padding-inline: clamp(1rem, 3vw, 2.5rem);
       border-block-start: 1px solid var(--hairline);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem 1.25rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      gap: 0.85rem 1.5rem;
     }
 
-    .colophon a {
-      color: var(--text-secondary);
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-primary);
       text-decoration: none;
       min-block-size: 44px;
       display: inline-flex;
       align-items: center;
+      transition: color 0.16s ease;
     }
 
-    .colophon a:hover {
+    .footer-brand:hover {
       color: var(--cyan);
+    }
+
+    .social-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .social-link {
+      inline-size: 44px;
+      block-size: 44px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--hairline);
+      background: rgba(9, 7, 15, 0.65);
+      color: var(--text-secondary);
+      display: inline-grid;
+      place-items: center;
+      text-decoration: none;
+      transition: border-color 0.16s ease, color 0.16s ease, background-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .social-link:hover {
+      border-color: var(--cyan);
+      background: var(--surface-hover);
+      color: var(--cyan);
+      transform: translateY(-1px);
+    }
+
+    .social-link svg {
+      inline-size: 1.15rem;
+      block-size: 1.15rem;
+      display: block;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1291,12 +1348,14 @@
       }
 
       .cta-enter:hover,
-      .btn-primary:hover {
+      .btn-primary:hover,
+      .social-link:hover {
         transform: none;
       }
 
       .viewfinder-frame,
-      .vf-subject {
+      .vf-subject,
+      .select-input::picker(select) {
         transition: none;
       }
     }
@@ -1307,7 +1366,8 @@
       .segmented-control,
       .ratio-label,
       .prompt-textarea,
-      .btn-secondary,
+      .ai-chip,
+      .social-link,
       .viewfinder-shell {
         border: 1px solid CanvasText;
       }
@@ -1337,7 +1397,7 @@
   </style>
 </head>
 <body>
-  <a href="#estudio-titulo" class="skip-link visually-hidden">Saltar al estudio de prompts</a>
+  <a href="#estudio-titulo" class="skip-link">Saltar al estudio de prompts</a>
 
   <header class="cover-stage">
     <div class="cover-atmosphere" aria-hidden="true">
@@ -1362,36 +1422,13 @@
       <div class="cover-vignette"></div>
     </div>
 
-    <div class="topbar">
-      <a href="#estudio-titulo" class="wordmark">
-        <svg class="wordmark-mark" aria-hidden="true" viewBox="0 0 32 32" fill="none">
-          <rect x="1.5" y="1.5" width="29" height="29" rx="5" stroke="#ff4e79" stroke-width="2"/>
-          <circle cx="16" cy="14" r="6.5" fill="#ff8c42"/>
-          <path d="M7 22h18M10 25.5h12" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span>Costa Sur · 86</span>
-      </a>
-
-      <nav class="topbar-nav" aria-label="Navegación principal">
-        <a href="#estudio-titulo" class="nav-link">Estudio</a>
-        <a href="https://chatgpt.com" class="nav-link" target="_blank" rel="noopener noreferrer">
-          <span>ChatGPT</span>
-          <span class="visually-hidden">(se abre en una pestaña nueva)</span>
-        </a>
-        <a href="https://gemini.google.com" class="nav-link" target="_blank" rel="noopener noreferrer">
-          <span>Gemini</span>
-          <span class="visually-hidden">(se abre en una pestaña nueva)</span>
-        </a>
-      </nav>
-    </div>
-
     <div class="cover-center">
       <p class="cover-kicker">Dirección artística · Estética tropical 80s / 90s</p>
       <h1 class="cover-title">
         Noches de
         <span class="cover-title-accent">Miami</span>
       </h1>
-      <p class="cover-lead">Configura escena, luz, protagonista y encuadre en tiempo real para generar prompts listos para transformar tus fotos o ilustrar miniaturas desde cero.</p>
+      <p class="cover-lead">Configura escena, luz, protagonista y encuadre en tiempo real para generar prompts compatibles con cualquier IA de imágenes.</p>
       <div class="cover-actions">
         <a href="#estudio-titulo" class="cta-enter">
           <span>Abrir el estudio</span>
@@ -1409,7 +1446,7 @@
   <main id="estudio" class="studio-section">
     <div class="studio-intro">
       <h2 id="estudio-titulo" class="studio-heading" tabindex="-1">Estudio de prompts</h2>
-      <p class="studio-sub">Actualización instantánea · Sin marcas ni texto</p>
+      <p class="studio-sub">Compatible con cualquier generador de imágenes</p>
     </div>
 
     <div class="studio-grid">
@@ -1423,12 +1460,18 @@
             </legend>
             <div class="segmented-control">
               <div class="segment-item">
-                <input class="visually-hidden" type="radio" id="mode-photo" name="mode" value="photo" checked>
-                <label class="segment-label" for="mode-photo">Transformar mi foto</label>
+                <input class="sr-only-input" type="radio" id="mode-photo" name="mode" value="photo" checked>
+                <label class="segment-label" for="mode-photo">
+                  <span class="segment-dot" aria-hidden="true"></span>
+                  <span>Transformar mi foto</span>
+                </label>
               </div>
               <div class="segment-item">
-                <input class="visually-hidden" type="radio" id="mode-scratch" name="mode" value="scratch">
-                <label class="segment-label" for="mode-scratch">Crear imagen desde cero</label>
+                <input class="sr-only-input" type="radio" id="mode-scratch" name="mode" value="scratch">
+                <label class="segment-label" for="mode-scratch">
+                  <span class="segment-dot" aria-hidden="true"></span>
+                  <span>Crear imagen desde cero</span>
+                </label>
               </div>
             </div>
             <p id="mode-hint" class="field-hint">Mantiene reconocibles facciones, peinado, expresión y tono de piel de tu foto adjunta.</p>
@@ -1492,7 +1535,7 @@
             </legend>
             <div class="ratio-list">
               <div class="ratio-item">
-                <input class="visually-hidden" type="radio" id="format-16-9" name="format" value="16:9" checked>
+                <input class="sr-only-input" type="radio" id="format-16-9" name="format" value="16:9" checked>
                 <label class="ratio-label" for="format-16-9">
                   <span class="ratio-icon" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -1514,7 +1557,7 @@
               </div>
 
               <div class="ratio-item">
-                <input class="visually-hidden" type="radio" id="format-9-16" name="format" value="9:16">
+                <input class="sr-only-input" type="radio" id="format-9-16" name="format" value="9:16">
                 <label class="ratio-label" for="format-9-16">
                   <span class="ratio-icon" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -1536,7 +1579,7 @@
               </div>
 
               <div class="ratio-item">
-                <input class="visually-hidden" type="radio" id="format-1-1" name="format" value="1:1">
+                <input class="sr-only-input" type="radio" id="format-1-1" name="format" value="1:1">
                 <label class="ratio-label" for="format-1-1">
                   <span class="ratio-icon" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -1573,7 +1616,6 @@
                 <svg class="vf-svg" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
                   <circle cx="160" cy="86" r="46" fill="rgba(255, 224, 150, 0.35)"/>
 
-                  <!-- Scene 1: Boardwalk -->
                   <g class="vf-scene" data-scene="boardwalk">
                     <rect x="0" y="128" width="320" height="52" fill="rgba(12, 8, 24, 0.72)"/>
                     <path d="M0 132h320" stroke="rgba(0, 240, 255, 0.45)" stroke-width="1.5"/>
@@ -1581,7 +1623,6 @@
                     <path d="M276 154c-4-28-12-52-26-74M250 80c16-4 30 2 40 12M250 80c10-14 24-18 36-14M250 80c-14-12-30-10-42 0" stroke="#0b0814" stroke-width="3.5" stroke-linecap="round" fill="none"/>
                   </g>
 
-                  <!-- Scene 2: Art Deco -->
                   <g class="vf-scene" data-scene="artdeco">
                     <rect x="0" y="136" width="320" height="44" fill="#090711"/>
                     <path fill="#110b1f" d="M18 138V58h18V42h24v16h18v80Zm76 0V44h16V26h30v18h16v94Zm114 0V62h18V46h26v16h18v76Z"/>
@@ -1589,7 +1630,6 @@
                     <path d="M98 76h54M24 88h48M214 90h50" stroke="#ff4e79" stroke-width="2" opacity="0.85"/>
                   </g>
 
-                  <!-- Scene 3: Classic convertible -->
                   <g class="vf-scene" data-scene="classic-car">
                     <rect x="0" y="124" width="320" height="56" fill="rgba(12, 8, 22, 0.78)"/>
                     <path d="M40 144l18-16h54l22-12h44l10 12h44l14 14v12H40Z" fill="#090710" stroke="#00f0ff" stroke-width="1.3"/>
@@ -1598,14 +1638,12 @@
                     <path d="M262 146c3-24 10-46 22-66M284 80c-14-4-26 0-36 10M284 80c12-10 24-10 34-2" stroke="#08060e" stroke-width="3.5" stroke-linecap="round" fill="none"/>
                   </g>
 
-                  <!-- Scene 4: Rooftop skyline -->
                   <g class="vf-scene" data-scene="rooftop">
                     <path fill="#0d0918" d="M0 132h40V84h24v48h18V66h28v66h24V52h34v80h26V72h26v60h22V46h32v86h46v48H0Z"/>
                     <rect x="0" y="142" width="320" height="38" fill="#07050c"/>
                     <path d="M0 142h320" stroke="rgba(255, 78, 121, 0.7)" stroke-width="1.5"/>
                   </g>
 
-                  <!-- Subject silhouette -->
                   <g class="vf-subject">
                     <path d="M126 180c3-28 14-44 34-44s31 16 34 44Z" fill="#0a0712" stroke="rgba(255, 255, 255, 0.52)" stroke-width="1.4"/>
                     <circle cx="160" cy="112" r="16" fill="#0a0712" stroke="rgba(0, 240, 255, 0.75)" stroke-width="1.4"/>
@@ -1646,36 +1684,70 @@
             <span id="copy-status" class="copy-status" role="status"></span>
           </div>
 
-          <div class="quick-links">
-            <a
-              class="btn-secondary"
-              href="https://chatgpt.com"
-              target="_blank"
-              rel="noopener noreferrer">
-              <span>Abrir ChatGPT</span>
-              <span class="visually-hidden">(se abre en una pestaña nueva)</span>
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17 17 7M9 7h8v8"/>
-              </svg>
-            </a>
-            <a
-              class="btn-secondary"
-              href="https://gemini.google.com"
-              target="_blank"
-              rel="noopener noreferrer">
-              <span>Abrir Gemini</span>
-              <span class="visually-hidden">(se abre en una pestaña nueva)</span>
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17 17 7M9 7h8v8"/>
-              </svg>
-            </a>
+          <div class="ai-dock">
+            <p class="ai-dock-label">Úsalo en cualquier IA de imagen · Accesos directos</p>
+            <div class="ai-dock-list">
+              <a class="ai-chip" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span>ChatGPT</span>
+                <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+              <a class="ai-chip" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a9 9 0 0 0 9 9 9 9 0 0 0-9 9 9 9 0 0 0-9-9 9 9 0 0 0 9-9Z"/>
+                </svg>
+                <span>Gemini</span>
+                <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+              <a class="ai-chip" href="https://grok.com" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M17 7 7 17"/>
+                </svg>
+                <span>Grok</span>
+                <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+              <a class="ai-chip" href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 17h18M5 17c2-7 5-11 9-12 1 4 2 8 5 12"/>
+                </svg>
+                <span>Midjourney</span>
+                <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+              <a class="ai-chip" href="https://ideogram.ai" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="3"/>
+                  <circle cx="9.5" cy="9.5" r="1.5"/>
+                  <path d="m20 16-4.5-4.5L8 19"/>
+                </svg>
+                <span>Ideogram</span>
+                <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+              <a class="ai-chip" href="https://app.leonardo.ai" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4 9l8 12 8-12-8-6Z"/>
+                </svg>
+                <span>Leonardo</span>
+                <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+              <a class="ai-chip" href="https://firefly.adobe.com" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="4"/>
+                  <path d="M9 17V7h7M9 12h5"/>
+                </svg>
+                <span>Firefly</span>
+                <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+            </div>
           </div>
 
           <section class="steps-box" aria-labelledby="steps-title">
             <h3 id="steps-title" class="steps-title">Cómo usarlo en 3 pasos</h3>
             <ol class="steps-list">
               <li>Copiar el prompt.</li>
-              <li>Abrir ChatGPT o Gemini y adjuntar la foto si se eligió «Transformar mi foto».</li>
+              <li>Abrir tu IA de imágenes preferida y adjuntar la foto si se eligió «Transformar mi foto».</li>
               <li>Pegar y generar.</li>
             </ol>
           </section>
@@ -1684,9 +1756,49 @@
     </div>
   </main>
 
-  <footer class="colophon">
-    <span>Costa Sur · Generador de prompts</span>
-    <a href="#top" id="back-to-top">Volver arriba ↑</a>
+  <footer class="site-footer">
+    <a class="footer-brand" href="https://atedian.com/" target="_blank" rel="noopener noreferrer">
+      atedian
+      <span class="sr-only">(sitio web, se abre en una pestaña nueva)</span>
+    </a>
+
+    <nav class="social-nav" aria-label="Redes y web de Atedian">
+      <a class="social-link" href="https://atedian.com/" target="_blank" rel="noopener noreferrer" aria-label="Web de Atedian (se abre en una pestaña nueva)">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://www.youtube.com/@atedian" target="_blank" rel="noopener noreferrer" aria-label="YouTube de Atedian (se abre en una pestaña nueva)">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/>
+          <path d="m10 9.5 5 2.5-5 2.5v-5Z" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://www.instagram.com/atedianweb/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Atedian (se abre en una pestaña nueva)">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://www.tiktok.com/@atedianweb" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Atedian (se abre en una pestaña nueva)">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 4v10.5a3.5 3.5 0 1 1-2.5-3.35"/>
+          <path d="M14 4c1 2.4 2.8 3.9 5 4.2"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://x.com/atedianweb" target="_blank" rel="noopener noreferrer" aria-label="X de Atedian (se abre en una pestaña nueva)">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4l16 16M20 4 4 20"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://github.com/atedian" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Atedian (se abre en una pestaña nueva)">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>
+        </svg>
+      </a>
+    </nav>
   </footer>
 
   <script>
@@ -1757,7 +1869,6 @@
       const outputEl = document.getElementById('prompt-output');
       const metaEl = document.getElementById('prompt-meta');
       const copyStatusEl = document.getElementById('copy-status');
-      const backToTopEl = document.getElementById('back-to-top');
 
       const copyTimers = new WeakMap();
       let lastAnnouncement = '';
@@ -1911,11 +2022,6 @@
         subjectEl.value = DEFAULT_SUBJECT;
         buildPrompt();
         subjectEl.focus({ preventScroll: true });
-      });
-
-      backToTopEl.addEventListener('click', (event) => {
-        event.preventDefault();
-        window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       });
 
       if ('CommandEvent' in window) {

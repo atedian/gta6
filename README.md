@@ -1,6 +1,6 @@
 # Costa Sur · Generador de Prompts Tropical 80s / 90s
 
-Herramienta web para crear prompts listos para usar en generadores de imágenes (como ChatGPT o Gemini), pensada para transformar fotografías o ilustrar escenas y miniaturas con estética tropical nocturna de los años 80 y 90.
+Herramienta web para crear prompts listos para usar en cualquier IA generadora de imágenes, pensada para transformar fotografías o ilustrar escenas y miniaturas con estética tropical nocturna de los años 80 y 90.
 
 **[Abrir la web en vivo](https://atedian.github.io/gta6/)**
 
@@ -16,7 +16,7 @@ Herramienta web para crear prompts listos para usar en generadores de imágenes 
    - **Formato y composición:** `16:9` para miniatura (sujeto en el tercio derecho y zona despejada a la izquierda para título), `9:16` vertical o `1:1` cuadrado.
 3. **Copia y genera:**
    - El panel derecho actualiza el prompt y el monitor de encuadre al instante con cada cambio.
-   - Pulsa **Copiar prompt**, abre **ChatGPT** o **Gemini** desde los accesos directos (adjuntando tu foto si elegiste *Transformar mi foto*), pega el texto y genera la imagen.
+   - Pulsa **Copiar prompt**, abre tu generador de imágenes preferido (adjuntando tu foto si elegiste *Transformar mi foto*), pega el texto y genera la imagen.
 
 ## Ejecución local
 
