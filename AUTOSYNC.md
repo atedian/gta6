@@ -10,7 +10,10 @@ Este directorio está enlazado con **https://github.com/atedian/gta6** y se publ
 - **Qué NO hace:** no reescribe ni formatea el código; no toca otras ramas.
 - **Registro:** `~/Library/Logs/atedian-gta6-autosync.log` (rotación a 512 KB).
 - **Credenciales:** token de la cuenta `atedian` leído de `gh` en cada pasada
-  (`gh auth token --user atedian`); no hay tokens escritos en el repo.
+  (`gh auth token --user atedian`); no hay tokens escritos en el repo. El script
+  ignora la configuración global de git para no acabar empujando con la cuenta
+  activa de `gh`. Para un `git push` manual desde tu terminal, cambia antes de
+  cuenta con `gh auth switch --user atedian` (o deja que lo haga el sincronizador).
 - **Pausar / reanudar:** `hermes cron` → trabajo `gta6-github-autosync`.
 - **Publicación:** al llegar el push, GitHub Pages reconstruye
   `https://atedian.github.io/gta6/` en ~1 minuto.
