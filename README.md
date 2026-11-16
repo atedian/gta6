@@ -1,4 +1,4 @@
-# Costa Sur · Generador de Prompts Tropical 80s / 90s
+# Noches de Miami — Generador de Prompts Tropical 80s / 90s
 
 Herramienta web para crear prompts listos para usar en cualquier IA generadora de imágenes, pensada para transformar fotografías o ilustrar escenas y miniaturas con estética tropical nocturna de los años 80 y 90.
 
