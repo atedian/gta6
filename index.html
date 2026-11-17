@@ -439,7 +439,7 @@
     .controls-form {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 0.55rem;
+      gap: 0.42rem;
     }
 
     .step-card {
@@ -467,12 +467,18 @@
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      gap: 0.65rem 0.75rem;
-      min-block-size: 56px;
-      padding: 0.6rem 0.85rem;
+      gap: 0.55rem 0.7rem;
+      min-block-size: 46px;
+      padding: 0.42rem 0.8rem;
       cursor: pointer;
       user-select: none;
       transition: background-color 0.16s ease;
+    }
+
+    @media (pointer: coarse) {
+      .step-summary {
+        min-block-size: 48px;
+      }
     }
 
     .step-summary::-webkit-details-marker {
@@ -687,6 +693,143 @@
       border-color: var(--cyan);
     }
 
+    /* Subject smart assistant chips & actions */
+    .assist-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .assist-chip {
+      font: inherit;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      min-block-size: 30px;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(166, 153, 199, 0.36);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+    }
+
+    .assist-chip:hover {
+      border-color: rgba(0, 240, 255, 0.65);
+      color: #ffffff;
+    }
+
+    .assist-chip[aria-pressed="true"] {
+      border-color: rgba(0, 240, 255, 0.85);
+      background: rgba(0, 240, 255, 0.14);
+      color: var(--cyan);
+    }
+
+    .assist-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-assist {
+      font: inherit;
+      font-family: var(--font-mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      min-block-size: 34px;
+      padding: 0.3rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 78, 121, 0.52);
+      background: rgba(255, 78, 121, 0.1);
+      color: #ffd3de;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+    }
+
+    .btn-assist:hover {
+      background: rgba(255, 78, 121, 0.22);
+      border-color: var(--coral);
+      color: #ffffff;
+    }
+
+    .text-input-line {
+      min-block-size: 44px;
+      max-block-size: none;
+      padding: 0.55rem 0.85rem;
+      resize: none;
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.4rem;
+    }
+
+    @media (min-width: 26rem) {
+      .style-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .style-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.38rem;
+      min-block-size: 42px;
+      padding: 0.4rem 0.55rem;
+      border-radius: var(--radius-sm);
+      background: var(--surface-well);
+      border: 1px solid rgba(138, 114, 189, 0.48);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+    }
+
+    .style-label:hover {
+      border-color: rgba(0, 240, 255, 0.65);
+      color: #ffffff;
+    }
+
+    .segment-item input:checked + .style-label {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: var(--cyan);
+      color: #ffffff;
+    }
+
+    .segment-item input:focus-visible + .style-label {
+      outline: 3px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    .style-swatch {
+      inline-size: 0.5rem;
+      block-size: 0.5rem;
+      border-radius: 50%;
+      flex: none;
+      background: linear-gradient(135deg, #00f0ff, #d938bf);
+    }
+
+    .style-swatch[data-swatch="chrome"] {
+      background: linear-gradient(135deg, #ffd166, #ff4e79);
+    }
+
+    .style-swatch[data-swatch="editorial"] {
+      background: #ffffff;
+    }
+
     /* Mode segmented switch */
     .segmented-control {
       display: grid;
@@ -771,10 +914,10 @@
     }
 
     .text-input {
-      padding: 0.7rem 0.85rem;
-      line-height: 1.48;
-      min-block-size: 4.25rem;
-      max-block-size: 8.5rem;
+      padding: 0.65rem 0.85rem;
+      line-height: 1.45;
+      min-block-size: 3.75rem;
+      max-block-size: 6.75rem;
       height: auto;
       field-sizing: content;
       resize: vertical;
@@ -936,7 +1079,7 @@
     .ratio-list {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 0.45rem;
+      gap: 0.34rem;
     }
 
     .ratio-item {
@@ -947,14 +1090,20 @@
     .ratio-label {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      min-block-size: 48px;
-      padding: 0.58rem 0.8rem;
+      gap: 0.68rem;
+      min-block-size: 46px;
+      padding: 0.44rem 0.72rem;
       border-radius: var(--radius-sm);
       background: var(--surface-well);
       border: 1px solid rgba(138, 114, 189, 0.52);
       cursor: pointer;
       transition: border-color 0.16s ease, background-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    @media (pointer: coarse) {
+      .ratio-label {
+        min-block-size: 48px;
+      }
     }
 
     .ratio-label:hover {
@@ -1160,7 +1309,7 @@
       border-radius: 2px;
       display: grid;
       place-items: center;
-      padding: 0.3rem;
+      padding: 0.35rem 0.45rem;
       font-family: var(--font-mono);
       font-size: 0.62rem;
       letter-spacing: 0.08em;
@@ -1170,11 +1319,63 @@
       text-shadow: 0 1px 6px rgba(9, 7, 15, 0.92);
       background: rgba(9, 7, 15, 0.34);
       opacity: 0;
+      overflow: hidden;
+      overflow-wrap: anywhere;
       pointer-events: none;
+      transition: opacity 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
     }
 
     .viewfinder-frame[data-format="16:9"] .vf-safe-zone {
       opacity: 1;
+    }
+
+    .viewfinder-frame[data-has-title="true"] .vf-safe-zone {
+      opacity: 1;
+      border-style: solid;
+      border-color: rgba(255, 255, 255, 0.16);
+      background: radial-gradient(circle at center, rgba(13, 9, 24, 0.58), rgba(13, 9, 24, 0.22));
+      font-family: var(--font-display);
+      font-size: clamp(0.84rem, 1.45vw, 1.08rem);
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      line-height: 1.05;
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-format="9:16"] .vf-safe-zone {
+      inset-block: 8% auto;
+      inset-inline: 8%;
+      inline-size: auto;
+      min-block-size: 24%;
+      font-size: 0.78rem;
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-format="1:1"] .vf-safe-zone {
+      inset-block: 8% auto;
+      inset-inline: 10%;
+      inline-size: auto;
+      min-block-size: 23%;
+      font-size: 0.92rem;
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-title-style="neon"] .vf-safe-zone {
+      color: #ffffff;
+      text-shadow:
+        0 0 8px rgba(0, 240, 255, 0.95),
+        0 0 18px rgba(217, 56, 191, 0.85),
+        0 2px 6px rgba(9, 7, 15, 0.95);
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-title-style="chrome"] .vf-safe-zone {
+      color: #ffd166;
+      text-shadow:
+        0 1px 0 #ff8c42,
+        0 2px 0 #ff4e79,
+        0 4px 12px rgba(9, 7, 15, 0.95);
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-title-style="editorial"] .vf-safe-zone {
+      color: #ffffff;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.95);
     }
 
     .prompt-field-wrap {
@@ -1479,6 +1680,7 @@
       .step-chevron,
       .viewfinder-frame,
       .vf-subject,
+      .vf-safe-zone,
       .select-input::picker(select) {
         transition: none;
       }
@@ -1489,6 +1691,9 @@
       .panel,
       .step-card,
       .ratio-label,
+      .style-label,
+      .assist-chip,
+      .btn-assist,
       .prompt-textarea,
       .ai-chip,
       .social-link,
@@ -1502,7 +1707,9 @@
       }
 
       .segment-item input:checked + .segment-label,
+      .segment-item input:checked + .style-label,
       .ratio-item input:checked + .ratio-label,
+      .assist-chip[aria-pressed="true"],
       .step-card[open] {
         border: 2px solid Highlight;
         outline: 1px solid Highlight;
@@ -1650,10 +1857,20 @@
                   rows="3"
                   placeholder="Persona mirando a cámara con camisa hawaiana abierta y gafas de sol en el cuello"
                   aria-describedby="subject-hint">Persona mirando a cámara con camisa hawaiana abierta y gafas de sol en el cuello</textarea>
-                <p id="subject-hint" class="field-hint">Describe ropa, pose o gesto. Pulsa Enter o Siguiente para avanzar.</p>
+                <div class="assist-bar" role="group" aria-label="Atajos rápidos de estilo para el protagonista">
+                  <button type="button" class="assist-chip" data-trait="gafas" aria-pressed="false">+ Gafas retro</button>
+                  <button type="button" class="assist-chip" data-trait="camisa" aria-pressed="false">+ Camisa tropical</button>
+                  <button type="button" class="assist-chip" data-trait="pose" aria-pressed="false">+ Pose confiada</button>
+                  <button type="button" class="assist-chip" data-trait="luz" aria-pressed="false">+ Luz en el perfil</button>
+                </div>
+                <p id="subject-hint" class="field-hint">Usa los atajos o Sugerir idea para completar rápido. Enter avanza.</p>
               </div>
               <div class="step-footer">
-                <button type="button" id="restore-subject-btn" class="btn-text-action">Restaurar ejemplo</button>
+                <div class="assist-actions">
+                  <button type="button" id="suggest-subject-btn" class="btn-assist">Sugerir idea</button>
+                  <button type="button" id="enhance-subject-btn" class="btn-assist">Mejorar detalle</button>
+                  <button type="button" id="restore-subject-btn" class="btn-text-action">Restaurar</button>
+                </div>
                 <button type="button" class="btn-step-next" data-next-step="3">Siguiente</button>
               </div>
             </div>
@@ -1767,7 +1984,7 @@
                       </span>
                       <span class="ratio-copy">
                         <span class="ratio-title">16:9 Miniatura YouTube</span>
-                        <span class="ratio-desc">Sujeto en el tercio derecho y espacio limpio a la izquierda para título</span>
+                        <span class="ratio-desc">Sujeto a la derecha y espacio izquierdo para título</span>
                       </span>
                       <span class="ratio-check" aria-hidden="true">
                         <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -1821,6 +2038,88 @@
                   </div>
                 </div>
               </div>
+              <div class="step-footer">
+                <button type="button" class="btn-step-next" data-next-step="6">Siguiente</button>
+              </div>
+            </div>
+          </details>
+
+          <!-- 06. Título o letras -->
+          <details class="step-card" id="step-6" name="studio-step" data-step="6">
+            <summary class="step-summary">
+              <span class="step-badge" aria-hidden="true">
+                <span class="step-badge-num">06</span>
+                <svg class="step-badge-check" width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>
+                </svg>
+              </span>
+              <span class="step-head-text">
+                <span class="step-name">Título o letras</span>
+                <span class="step-preview">
+                  <span id="preview-title" class="step-preview-text">Sin texto (solo imagen)</span>
+                </span>
+              </span>
+              <svg class="step-chevron" aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 7.5 5 5 5-5"/>
+              </svg>
+            </summary>
+            <div class="step-body">
+              <div class="step-body-top">
+                <div class="segmented-control" role="radiogroup" aria-label="Texto o título en la imagen">
+                  <div class="segment-item">
+                    <input class="sr-only-input" type="radio" id="text-mode-none" name="text-mode" value="none" checked>
+                    <label class="segment-label" for="text-mode-none">
+                      <span class="segment-dot" aria-hidden="true"></span>
+                      <span>Sin texto</span>
+                    </label>
+                  </div>
+                  <div class="segment-item">
+                    <input class="sr-only-input" type="radio" id="text-mode-title" name="text-mode" value="title">
+                    <label class="segment-label" for="text-mode-title">
+                      <span class="segment-dot" aria-hidden="true"></span>
+                      <span>Añadir título o texto</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="sr-only" for="title-text">Texto del título o rótulo</label>
+                  <input
+                    type="text"
+                    id="title-text"
+                    name="title-text"
+                    class="text-input text-input-line"
+                    maxlength="60"
+                    placeholder="Ej. NOCHES DE MIAMI"
+                    enterkeyhint="done"
+                    aria-describedby="title-hint">
+                </div>
+
+                <div class="style-grid" role="radiogroup" aria-label="Estilo visual de las letras">
+                  <div class="segment-item">
+                    <input class="sr-only-input" type="radio" id="title-style-neon" name="title-style" value="neon" checked>
+                    <label class="style-label" for="title-style-neon">
+                      <span class="style-swatch" data-swatch="neon" aria-hidden="true"></span>
+                      <span>Neón 80s</span>
+                    </label>
+                  </div>
+                  <div class="segment-item">
+                    <input class="sr-only-input" type="radio" id="title-style-chrome" name="title-style" value="chrome">
+                    <label class="style-label" for="title-style-chrome">
+                      <span class="style-swatch" data-swatch="chrome" aria-hidden="true"></span>
+                      <span>Cromo retro</span>
+                    </label>
+                  </div>
+                  <div class="segment-item">
+                    <input class="sr-only-input" type="radio" id="title-style-editorial" name="title-style" value="editorial">
+                    <label class="style-label" for="title-style-editorial">
+                      <span class="style-swatch" data-swatch="editorial" aria-hidden="true"></span>
+                      <span>Editorial</span>
+                    </label>
+                  </div>
+                </div>
+                <p id="title-hint" class="field-hint">Útil para miniaturas de YouTube o portadas con texto integrado.</p>
+              </div>
             </div>
           </details>
         </form>
@@ -1834,8 +2133,8 @@
               <span id="vf-mode-tag" class="viewfinder-tag">Con foto adjunta</span>
             </div>
             <div class="viewfinder-stage">
-              <div id="vf-frame" class="viewfinder-frame" data-scene="boardwalk" data-palette="sunset-coral" data-format="16:9">
-                <div class="vf-safe-zone">Zona libre para título</div>
+              <div id="vf-frame" class="viewfinder-frame" data-scene="boardwalk" data-palette="sunset-coral" data-format="16:9" data-has-title="false" data-title-style="neon">
+                <div id="vf-safe-zone" class="vf-safe-zone">Zona libre para título</div>
                 <svg class="vf-svg" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
                   <circle cx="160" cy="86" r="46" fill="rgba(255, 224, 150, 0.35)"/>
 
@@ -2005,6 +2304,7 @@
   <script>
     (() => {
       const DEFAULT_SUBJECT = 'Persona mirando a cámara con camisa hawaiana abierta y gafas de sol en el cuello';
+      const DEFAULT_TITLE = 'NOCHES DE MIAMI';
 
       const MODE_COPY = {
         photo: {
@@ -2021,6 +2321,78 @@
           prompt: (subject) =>
             `Ilustra la escena completa como una ilustración digital pintada a mano con contornos definidos, pincelada estilizada y sombras gráficas marcadas, evitando el acabado de cámara real y el render 3D. Protagonista y acción principal: ${subject}.`
         }
+      };
+
+      const TRAIT_CHIPS = {
+        gafas: {
+          match: /gafas|lentes/i,
+          clause: 'gafas de sol oscuras estilo aviador'
+        },
+        camisa: {
+          match: /camisa|chaqueta|lino|traje|vestido/i,
+          clause: 'camisa hawaiana abierta sobre camiseta clara'
+        },
+        pose: {
+          match: /mirando|sonriendo|pose|postura|apoyad|conduciendo|perfil/i,
+          clause: 'postura relajada y mirada directa con actitud segura'
+        },
+        luz: {
+          match: /luz|reflejo|recortando|perfil|destello/i,
+          clause: 'reflejos de luz recortando el contorno del perfil'
+        }
+      };
+
+      const SUBJECT_IDEAS = {
+        photo: {
+          boardwalk: [
+            'Con camisa tropical abierta de lino claro, gafas retro colgando del cuello y media sonrisa segura mirando a cámara',
+            'Apoyado ligeramente frente a la brisa del paseo marítimo con chaqueta ligera pastel y mirada confiada hacia el objetivo',
+            'Con camisa estampada ochentera, gesto sereno mirando de frente y luz cálida rasante suavizando el rostro'
+          ],
+          artdeco: [
+            'Vestido con americana clara arremangada sobre camiseta oscura, actitud nocturna elegante y reflejos de neón en el perfil',
+            'Con gafas oscuras ligeramente bajas mirando a cámara, chaqueta veraniega abierta y gesto carismático bajo luces de hotel',
+            'De medio plano con camisa de seda oscura y mirada firme iluminada lateralmente por destellos turquesa y coral'
+          ],
+          'classic-car': [
+            'Apoyado en la puerta de un deportivo clásico con camisa abierta estampada, gafas aviador puestas y gesto relajado',
+            'Con chaqueta retro desabrochada y una mano sobre el volante mirando por encima del hombro hacia la cámara',
+            'De perfil tres cuartos junto al descapotable con camisa tropical clara y brisa moviendo ligeramente el cabello'
+          ],
+          rooftop: [
+            'Con traje de lino claro y camisa desabrochada apoyado cerca de la barandilla, mirada tranquila y horizonte nocturno detrás',
+            'Con vestido o camisa veraniega elegante, expresión carismática mirando a cámara y luces urbanas recortando los hombros',
+            'De medio plano en actitud relajada sosteniendo gafas de sol en la mano con expresión segura al caer la tarde'
+          ]
+        },
+        scratch: {
+          boardwalk: [
+            'Joven carismático con camisa hawaiana abierta, gafas de sol oscuras y postura relajada caminando por el paseo junto al mar',
+            'Mujer estilizada con top coral, chaqueta ligera al viento y gafas retro mirando sobre el hombro al atardecer costero',
+            'Protagonista con camisa de lino blanca arremangada y cadena fina observando la avenida de palmeras con actitud cinematográfica'
+          ],
+          artdeco: [
+            'Pareja protagonista con estilismo veraniego ochentero, chaqueta pastel arremangada y gafas oscuras posando bajo rótulos geométricos de neón',
+            'Personaje enigmático con camisa satinada oscura, cuello abierto y mirada decidida bañada en luces turquesa y magenta',
+            'Mujer con blazer blanco ochentero y gafas finas avanzando por la acera iluminada frente a fachadas Art Déco'
+          ],
+          'classic-car': [
+            'Conductor apoyado en un descapotable clásico con camisa tropical abierta, reloj dorado y gafas de sol reflejando el cielo',
+            'Joven sentada en el capó de un deportivo ochentero con cazadora ligera turquesa, postura confiada y sonrisa sutil',
+            'Piloto nocturno sujetando las llaves junto al coche clásico con camisa estampada y luz rasante sobre la carrocería'
+          ],
+          rooftop: [
+            'Protagonista de espaldas tres cuartos girando la mirada hacia cámara desde una terraza elevada con traje claro veraniego',
+            'Personaje con chaqueta crema arremangada apoyado en la barandilla contemplando la bahía iluminada con copa en la barandilla',
+            'Duo estilizado en azotea tropical con camisas fluidas de colores suaves y perfil iluminado por la ciudad costera'
+          ]
+        }
+      };
+
+      const PALETTE_LIGHT_ACCENT = {
+        'sunset-coral': 'con luz rasante dorada y coral recortando el contorno',
+        'neon-night': 'con reflejos turquesa eléctrico y violeta iluminando el perfil',
+        'tropical-noon': 'bajo sol tropical luminoso con sombras gráficas nítidas'
       };
 
       const SCENE_PROMPTS = {
@@ -2055,7 +2427,7 @@
         '1:1': '1:1 Cuadrado'
       };
 
-      const FORMAT_PROMPTS = {
+      const FORMAT_PROMPTS_NO_TEXT = {
         '16:9':
           'Formato y composición: encuadre panorámico 16:9 pensado para miniatura, con el sujeto principal ubicado en el tercio derecho y espacio limpio, despejado y atmosférico en el lado izquierdo para añadir un título después en edición.',
         '9:16':
@@ -2064,14 +2436,49 @@
           'Formato y composición: encuadre cuadrado 1:1, equilibrado y centrado alrededor del protagonista y su entorno tropical.'
       };
 
+      const FORMAT_PROMPTS_WITH_TEXT = {
+        '16:9':
+          'Formato y composición: encuadre panorámico 16:9 pensado para miniatura de YouTube, con el sujeto principal ubicado en el tercio derecho y el rótulo tipográfico integrado con fuerza visual en el tercio izquierdo despejado.',
+        '9:16':
+          'Formato y composición: encuadre vertical 9:16 optimizado para Shorts, Reels y TikTok, con el protagonista situado ligeramente más abajo y amplio aire superior reservado para integrar el título.',
+        '1:1':
+          'Formato y composición: encuadre cuadrado 1:1 equilibrado alrededor del protagonista, dejando una franja superior limpia y legible para el rótulo.'
+      };
+
+      const TITLE_STYLES = {
+        neon: {
+          label: 'Neón 80s',
+          prompt: 'rotulación tubular brillante estilo neón ochentero en cian eléctrico y magenta con halo luminoso definido'
+        },
+        chrome: {
+          label: 'Cromo retro',
+          prompt: 'rotulación metálica retro cromada de bordes perfilados con reflejos coral, magenta y dorado cálido de atardecer'
+        },
+        editorial: {
+          label: 'Editorial',
+          prompt: 'tipografía sans serif condensada en blanco puro de alto contraste editorial y sombra nítida marcada'
+        }
+      };
+
+      const TITLE_ZONES = {
+        '16:9': 'el tercio izquierdo despejado frente al protagonista',
+        '9:16': 'la zona superior despejada encima del sujeto',
+        '1:1': 'la banda superior equilibrada sin cubrir el rostro ni el foco principal'
+      };
+
       const form = document.getElementById('prompt-form');
       const steps = Array.from(form.querySelectorAll('details.step-card'));
       const subjectEl = document.getElementById('subject');
+      const assistChips = Array.from(form.querySelectorAll('.assist-chip'));
+      const suggestBtn = document.getElementById('suggest-subject-btn');
+      const enhanceBtn = document.getElementById('enhance-subject-btn');
       const restoreBtn = document.getElementById('restore-subject-btn');
       const sceneEl = document.getElementById('scene');
       const paletteEl = document.getElementById('palette');
       const paletteSwatchEl = document.getElementById('palette-swatch');
       const paletteCaptionEl = document.getElementById('palette-caption');
+      const titleTextEl = document.getElementById('title-text');
+      const textModeTitleRadio = document.getElementById('text-mode-title');
       const modeHintEl = document.getElementById('mode-hint');
       const previewModeEl = document.getElementById('preview-mode');
       const previewSubjectEl = document.getElementById('preview-subject');
@@ -2079,7 +2486,9 @@
       const previewPaletteEl = document.getElementById('preview-palette');
       const previewPaletteSwatchEl = document.getElementById('preview-palette-swatch');
       const previewFormatEl = document.getElementById('preview-format');
+      const previewTitleEl = document.getElementById('preview-title');
       const vfFrameEl = document.getElementById('vf-frame');
+      const vfSafeZoneEl = document.getElementById('vf-safe-zone');
       const vfLabelEl = document.getElementById('vf-label');
       const vfModeTagEl = document.getElementById('vf-mode-tag');
       const outputEl = document.getElementById('prompt-output');
@@ -2089,8 +2498,8 @@
       const copyTimers = new WeakMap();
       let lastAnnouncement = '';
       let advanceTimer = null;
-      let lastCompositionEndAt = null;
       let pointerActivatedControl = false;
+      let lastIdeaIndex = -1;
 
       /* Exclusive details fallback for older browsers without details[name] */
       if (!Object.hasOwn(HTMLDetailsElement.prototype, 'name')) {
@@ -2118,36 +2527,71 @@
         return collapsed || DEFAULT_SUBJECT;
       }
 
+      function sanitizeTitle(rawText) {
+        return rawText
+          .replace(/[\r\n]+/g, ' ')
+          .replace(/[«»"'`]+/g, '')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
       function getSelectedOptionLabel(selectEl) {
         const opt = selectEl.options[selectEl.selectedIndex];
         return opt ? opt.textContent : '';
       }
 
+      function syncTraitChips(text) {
+        for (const chip of assistChips) {
+          const trait = TRAIT_CHIPS[chip.dataset.trait];
+          chip.setAttribute('aria-pressed', trait && trait.match.test(text) ? 'true' : 'false');
+        }
+      }
+
       function buildPrompt() {
         const mode = getSelectedValue('mode', 'photo');
         const format = getSelectedValue('format', '16:9');
+        const textMode = getSelectedValue('text-mode', 'none');
+        const titleStyle = getSelectedValue('title-style', 'neon');
         const scene = sceneEl.value;
         const palette = paletteEl.value;
         const subject = normalizeSubject(subjectEl.value);
+        const cleanTitle = sanitizeTitle(titleTextEl.value);
+        const hasTitle = textMode === 'title';
+        const effectiveTitle = cleanTitle || DEFAULT_TITLE;
 
         const modeConfig = MODE_COPY[mode] || MODE_COPY.photo;
         const paletteConfig = PALETTE_PROMPTS[palette] || PALETTE_PROMPTS['sunset-coral'];
         const sceneText = SCENE_PROMPTS[scene] || SCENE_PROMPTS.boardwalk;
-        const formatText = FORMAT_PROMPTS[format] || FORMAT_PROMPTS['16:9'];
+        const formatMap = hasTitle ? FORMAT_PROMPTS_WITH_TEXT : FORMAT_PROMPTS_NO_TEXT;
+        const formatText = formatMap[format] || formatMap['16:9'];
+        const styleConfig = TITLE_STYLES[titleStyle] || TITLE_STYLES.neon;
 
         const opening =
           'Crea una imagen estilo ilustración cinematográfica tropical con estética ochentera y noventera de la costa de Miami, de acabado pictórico editorial, vibrante y expresivo.';
-        const closing =
-          'Regla final imprescindible: no incluyas texto, letras, números, títulos, logotipos ni marcas de agua en ningún lugar de la imagen.';
 
-        const fullPrompt = [
+        const blocks = [
           opening,
           modeConfig.prompt(subject),
           sceneText,
           paletteConfig.text,
-          formatText,
-          closing
-        ].join('\n\n');
+          formatText
+        ];
+
+        if (hasTitle) {
+          const zoneText = TITLE_ZONES[format] || TITLE_ZONES['16:9'];
+          blocks.push(
+            `Texto y tipografía integrados: incluye exactamente el texto «${effectiveTitle}» colocado en ${zoneText}, con ${styleConfig.prompt}, ortografía impecable, trazos definidos y lectura clara a distancia.`
+          );
+          blocks.push(
+            `Regla final imprescindible: renderiza únicamente el texto indicado («${effectiveTitle}») con ortografía exacta y no añadas subtítulos extra, palabras inventadas, logotipos ni marcas de agua.`
+          );
+        } else {
+          blocks.push(
+            'Regla final imprescindible: no incluyas texto, letras, números, títulos, logotipos ni marcas de agua en ningún lugar de la imagen.'
+          );
+        }
+
+        const fullPrompt = blocks.join('\n\n');
 
         outputEl.value = fullPrompt;
         modeHintEl.textContent = modeConfig.hint;
@@ -2159,6 +2603,9 @@
         previewPaletteEl.textContent = getSelectedOptionLabel(paletteEl);
         previewPaletteSwatchEl.dataset.palette = palette;
         previewFormatEl.textContent = FORMAT_LABELS[format] || format;
+        previewTitleEl.textContent = hasTitle ? `«${effectiveTitle}» (${styleConfig.label})` : 'Sin texto (solo imagen)';
+
+        syncTraitChips(subject);
 
         paletteSwatchEl.dataset.palette = palette;
         paletteCaptionEl.textContent = paletteConfig.caption;
@@ -2166,8 +2613,53 @@
         vfFrameEl.dataset.scene = scene;
         vfFrameEl.dataset.palette = palette;
         vfFrameEl.dataset.format = format;
+        vfFrameEl.dataset.hasTitle = hasTitle ? 'true' : 'false';
+        vfFrameEl.dataset.titleStyle = titleStyle;
+        vfSafeZoneEl.textContent = hasTitle ? effectiveTitle : 'Zona libre para título';
         vfLabelEl.textContent = `Encuadre ${format}`;
         vfModeTagEl.textContent = modeConfig.tag;
+      }
+
+      function suggestSubjectIdea() {
+        const mode = getSelectedValue('mode', 'photo');
+        const scene = sceneEl.value;
+        const pool = (SUBJECT_IDEAS[mode] && SUBJECT_IDEAS[mode][scene]) || SUBJECT_IDEAS.photo.boardwalk;
+        let nextIndex = (lastIdeaIndex + 1) % pool.length;
+        if (pool[nextIndex] === subjectEl.value.trim() && pool.length > 1) {
+          nextIndex = (nextIndex + 1) % pool.length;
+        }
+        lastIdeaIndex = nextIndex;
+        subjectEl.value = pool[nextIndex];
+        buildPrompt();
+        subjectEl.focus({ preventScroll: true });
+      }
+
+      function enhanceSubjectDetails() {
+        const mode = getSelectedValue('mode', 'photo');
+        const palette = paletteEl.value;
+        const base = normalizeSubject(subjectEl.value);
+        const addOns = [];
+
+        if (!/camisa|chaqueta|lino|traje|vestido|ropa|americana/i.test(base)) {
+          addOns.push(mode === 'photo' ? 'con camisa tropical ligera de corte ochentero' : 'con chaqueta de lino arremangada y camisa abierta');
+        }
+        if (!/gafas|lentes/i.test(base)) {
+          addOns.push('con gafas de sol estilo retro');
+        }
+        if (!/mirando|pose|postura|sonrisa|mirada|perfil|actitud/i.test(base) && addOns.length < 2) {
+          addOns.push('con mirada segura hacia cámara y expresión serena');
+        }
+        if (!/luz|reflejo|neón|brillo|dorada|iluminad/i.test(base) && addOns.length < 2) {
+          addOns.push(PALETTE_LIGHT_ACCENT[palette] || PALETTE_LIGHT_ACCENT['sunset-coral']);
+        }
+
+        if (addOns.length === 0) {
+          addOns.push(PALETTE_LIGHT_ACCENT[palette] || PALETTE_LIGHT_ACCENT['sunset-coral']);
+        }
+
+        subjectEl.value = `${base}, ${addOns.slice(0, 2).join(', ')}`;
+        buildPrompt();
+        subjectEl.focus({ preventScroll: true });
       }
 
       function openStep(stepNumber, focusTarget = null) {
@@ -2193,12 +2685,41 @@
         const current = document.getElementById(`step-${stepNumber}`);
         if (current) current.dataset.done = 'true';
 
-        if (stepNumber < 5) {
+        if (stepNumber < steps.length) {
           const nextNum = stepNumber + 1;
           advanceTimer = setTimeout(() => {
             openStep(nextNum);
           }, delayMs);
         }
+      }
+
+      function attachImeSafeEnter(inputEl, onEnterConfirm) {
+        let lastCompEnd = null;
+        inputEl.addEventListener('compositionend', (event) => {
+          lastCompEnd = event.timeStamp;
+        });
+        inputEl.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            if (event.isComposing) return;
+            if (lastCompEnd !== null && Math.abs(event.timeStamp - lastCompEnd) < 50) {
+              return;
+            }
+            onEnterConfirm();
+          }
+        });
+      }
+
+      function attachAlreadyCheckedAdvance(selector, stepNumber, delayMs) {
+        form.querySelectorAll(selector).forEach((label) => {
+          label.addEventListener('click', () => {
+            const inputId = label.getAttribute('for');
+            const input = inputId ? document.getElementById(inputId) : null;
+            if (input && input.checked) {
+              completeStep(stepNumber, delayMs);
+            }
+          });
+        });
       }
 
       function reportCopyStatus(button, state, message) {
@@ -2301,60 +2822,76 @@
         pointerActivatedControl = false;
       });
 
-      form.addEventListener('input', buildPrompt);
+      form.addEventListener('input', (event) => {
+        if (event.target === titleTextEl && textModeTitleRadio && titleTextEl.value.trim()) {
+          textModeTitleRadio.checked = true;
+        }
+        buildPrompt();
+      });
 
       form.addEventListener('change', (event) => {
-        buildPrompt();
         const target = event.target;
+        if (target instanceof HTMLInputElement && target.name === 'title-style' && textModeTitleRadio) {
+          textModeTitleRadio.checked = true;
+        }
+        buildPrompt();
         if (!(target instanceof HTMLElement)) return;
         const stepCard = target.closest('details.step-card');
         if (!stepCard) return;
 
         const stepNum = Number(stepCard.dataset.step);
-        if (stepNum === 1 && pointerActivatedControl) {
-          completeStep(1, 200);
-        } else if (stepNum === 3) {
-          completeStep(3, 200);
-        } else if (stepNum === 4) {
-          completeStep(4, 200);
-        } else if (stepNum === 5) {
+        if ((stepNum === 1 || stepNum === 5) && pointerActivatedControl) {
+          completeStep(stepNum, 200);
+        } else if (stepNum === 3 || stepNum === 4) {
+          completeStep(stepNum, 200);
+        } else if (stepNum === 6) {
           stepCard.dataset.done = 'true';
         }
       });
 
-      /* Clicking an already-selected mode option via pointer still completes step 1 cleanly */
-      form.querySelectorAll('#step-1 .segment-label').forEach((label) => {
+      /* Clicking an already-selected mode/format option via pointer still completes and advances cleanly */
+      attachAlreadyCheckedAdvance('#step-1 .segment-label', 1, 180);
+      attachAlreadyCheckedAdvance('#step-5 .ratio-label', 5, 180);
+
+      attachImeSafeEnter(subjectEl, () => completeStep(2, 60));
+      attachImeSafeEnter(titleTextEl, () => {
+        if (textModeTitleRadio) textModeTitleRadio.checked = true;
+        const step6 = document.getElementById('step-6');
+        if (step6) step6.dataset.done = 'true';
+        buildPrompt();
+      });
+
+      for (const chip of assistChips) {
+        chip.addEventListener('click', () => {
+          const trait = TRAIT_CHIPS[chip.dataset.trait];
+          if (!trait) return;
+          const current = subjectEl.value.replace(/\s+/g, ' ').trim().replace(/[.]+$/, '');
+          if (trait.match.test(current)) {
+            const cleaned = current
+              .replace(new RegExp(`,?\\s*(?:con\\s+)?${trait.clause.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i'), '')
+              .replace(/^,\s*/, '')
+              .trim();
+            subjectEl.value = cleaned;
+          } else {
+            subjectEl.value = current ? `${current}, con ${trait.clause}` : `Persona con ${trait.clause}`;
+          }
+          buildPrompt();
+          subjectEl.focus({ preventScroll: true });
+        });
+      }
+
+      suggestBtn.addEventListener('click', suggestSubjectIdea);
+      enhanceBtn.addEventListener('click', enhanceSubjectDetails);
+
+      form.querySelectorAll('#step-6 .style-label').forEach((label) => {
         label.addEventListener('click', () => {
-          const inputId = label.getAttribute('for');
-          const input = inputId ? document.getElementById(inputId) : null;
-          if (input && input.checked) {
-            completeStep(1, 180);
+          if (textModeTitleRadio && !textModeTitleRadio.checked) {
+            textModeTitleRadio.checked = true;
+            const step6 = document.getElementById('step-6');
+            if (step6) step6.dataset.done = 'true';
+            buildPrompt();
           }
         });
-      });
-
-      /* Clicking an already-selected format option marks step 5 done without jarring collapse */
-      form.querySelectorAll('#step-5 .ratio-label').forEach((label) => {
-        label.addEventListener('click', () => {
-          const step5 = document.getElementById('step-5');
-          if (step5) step5.dataset.done = 'true';
-        });
-      });
-
-      /* IME-safe Enter to complete step 2 textarea (Strategy 2: timeStamp guard) */
-      subjectEl.addEventListener('compositionend', (event) => {
-        lastCompositionEndAt = event.timeStamp;
-      });
-
-      subjectEl.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' && !event.shiftKey) {
-          event.preventDefault();
-          if (event.isComposing) return;
-          if (lastCompositionEndAt !== null && Math.abs(event.timeStamp - lastCompositionEndAt) < 50) {
-            return;
-          }
-          completeStep(2, 60);
-        }
       });
 
       form.querySelectorAll('.btn-step-next').forEach((btn) => {
