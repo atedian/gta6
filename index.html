@@ -1116,6 +1116,7 @@
     .vf-svg {
       position: absolute;
       inset: 0;
+      z-index: 1;
       display: block;
       inline-size: 100%;
       block-size: 100%;
@@ -1153,8 +1154,9 @@
       position: absolute;
       inset-block: 14%;
       inset-inline-start: 7%;
+      z-index: 2;
       inline-size: 44%;
-      border: 1px dashed rgba(255, 255, 255, 0.45);
+      border: 1px dashed rgba(255, 255, 255, 0.55);
       border-radius: 2px;
       display: grid;
       place-items: center;
@@ -1164,8 +1166,9 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-align: center;
-      color: rgba(255, 255, 255, 0.88);
-      background: rgba(9, 7, 15, 0.28);
+      color: rgba(255, 255, 255, 0.94);
+      text-shadow: 0 1px 6px rgba(9, 7, 15, 0.92);
+      background: rgba(9, 7, 15, 0.34);
       opacity: 0;
       pointer-events: none;
     }
@@ -2356,6 +2359,7 @@
 
       form.querySelectorAll('.btn-step-next').forEach((btn) => {
         btn.addEventListener('click', () => {
+          clearTimeout(advanceTimer);
           const currentCard = btn.closest('details.step-card');
           if (currentCard) currentCard.dataset.done = 'true';
           const nextStep = Number(btn.dataset.nextStep);
