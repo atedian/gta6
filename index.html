@@ -1957,7 +1957,7 @@
                   <button type="button" class="assist-chip" data-trait="pose" aria-pressed="false">+ Pose confiada</button>
                   <button type="button" class="assist-chip" data-trait="luz" aria-pressed="false">+ Luz en el perfil</button>
                 </div>
-                <p id="subject-hint" class="field-hint">Usa los atajos o Sugerir idea para completar rápido. Enter avanza.</p>
+                <p id="subject-hint" class="field-hint">Usa los atajos o Sugerir idea y pulsa Siguiente para avanzar.</p>
               </div>
               <div class="step-footer">
                 <div class="assist-actions">
@@ -2670,8 +2670,6 @@
 
       const copyTimers = new WeakMap();
       let lastAnnouncement = '';
-      let advanceTimer = null;
-      let pointerActivatedControl = false;
       let lastIdeaIndex = -1;
       let userPickedSubjectPos = false;
       let userPickedTitlePos = false;
@@ -2864,19 +2862,6 @@
         }
       }
 
-      function completeStep(stepNumber, delayMs = 200) {
-        clearTimeout(advanceTimer);
-        const current = document.getElementById(`step-${stepNumber}`);
-        if (current) current.dataset.done = 'true';
-
-        if (stepNumber < steps.length) {
-          const nextNum = stepNumber + 1;
-          advanceTimer = setTimeout(() => {
-            openStep(nextNum);
-          }, delayMs);
-        }
-      }
-
       function attachImeSafeEnter(inputEl, onEnterConfirm) {
         let lastCompEnd = null;
         inputEl.addEventListener('compositionend', (event) => {
@@ -2891,18 +2876,6 @@
             }
             onEnterConfirm();
           }
-        });
-      }
-
-      function attachAlreadyCheckedAdvance(selector, stepNumber, delayMs) {
-        form.querySelectorAll(selector).forEach((label) => {
-          label.addEventListener('click', () => {
-            const inputId = label.getAttribute('for');
-            const input = inputId ? document.getElementById(inputId) : null;
-            if (input && input.checked) {
-              completeStep(stepNumber, delayMs);
-            }
-          });
         });
       }
 
@@ -2998,14 +2971,6 @@
         event.preventDefault();
       });
 
-      form.addEventListener('pointerdown', () => {
-        pointerActivatedControl = true;
-      });
-
-      form.addEventListener('keydown', () => {
-        pointerActivatedControl = false;
-      });
-
       form.addEventListener('input', (event) => {
         if (event.target === titleTextEl && textModeTitleRadio && titleTextEl.value.trim()) {
           textModeTitleRadio.checked = true;
@@ -3038,30 +3003,12 @@
           }
         }
         buildPrompt();
-        if (!(target instanceof HTMLElement)) return;
-        const stepCard = target.closest('details.step-card');
-        if (!stepCard) return;
-
-        const stepNum = Number(stepCard.dataset.step);
-        if (stepNum === 1 && pointerActivatedControl) {
-          completeStep(1, 200);
-        } else if (stepNum === 3 || stepNum === 4) {
-          completeStep(stepNum, 200);
-        } else if (stepNum === 5) {
-          stepCard.dataset.done = 'true';
-          if (target instanceof HTMLInputElement && target.name === 'subject-pos' && pointerActivatedControl) {
-            completeStep(5, 200);
-          }
-        } else if (stepNum === 6) {
-          stepCard.dataset.done = 'true';
+        if (target instanceof HTMLElement) {
+          const stepCard = target.closest('details.step-card');
+          if (stepCard) stepCard.dataset.done = 'true';
         }
       });
 
-      /* Clicking an already-selected mode/subject-pos option via pointer advances cleanly */
-      attachAlreadyCheckedAdvance('#step-1 .segment-label', 1, 180);
-      attachAlreadyCheckedAdvance('#step-5 .style-label', 5, 180);
-
-      attachImeSafeEnter(subjectEl, () => completeStep(2, 60));
       attachImeSafeEnter(titleTextEl, () => {
         if (textModeTitleRadio) textModeTitleRadio.checked = true;
         const step6 = document.getElementById('step-6');
@@ -3108,7 +3055,6 @@
 
       form.querySelectorAll('.btn-step-next').forEach((btn) => {
         btn.addEventListener('click', () => {
-          clearTimeout(advanceTimer);
           const currentCard = btn.closest('details.step-card');
           if (currentCard) currentCard.dataset.done = 'true';
           const nextStep = Number(btn.dataset.nextStep);
