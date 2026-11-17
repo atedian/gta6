@@ -23,6 +23,11 @@ Reference blocks synchronized with the interactive studio (`index.html`).
 - **Hoteles Art Déco (`artdeco`):** Una calle nocturna con hoteles de arquitectura Art Déco e iluminación decorativa de neón en formas geométricas abstractas sin rótulos legibles, aceras con reflejos de color y palmeras urbanas.
 - **Deportivo clásico (`classic-car`):** Un automóvil deportivo clásico descapotable aparcado junto a la playa al anochecer, con carrocería brillante reflejando las luces del cielo, arena costera, palmeras y el océano detrás.
 - **Azotea costera (`rooftop`):** Una azotea elevada con barandilla elegante y plantas tropicales, abierta hacia vistas panorámicas al skyline costero iluminado y reflejos sobre la bahía.
+- **Cayos tropicales (`keys`):** Una cadena de cayos tropicales conectados por un largo puente costero sobre aguas turquesa cristalinas, muelles de madera desgastada, casas elevadas sobre pilotes, palmeras bajas y alguna lancha amarrada en el horizonte.
+- **Pantanos y manglares (`wetlands`):** Extensos pantanos subtropicales con manglares densos, árboles cubiertos de musgo colgante, aguas quietas con reflejos cálidos, bruma húmeda baja y la silueta de un hidrodeslizador en la orilla.
+- **Motel y puerto costero (`port`):** Una zona portuaria y costera algo decadente con un motel bajo de carretera, acera húmeda con reflejos de neón, muelles de carga, grúas portuarias en segundo plano y ambiente nocturno tenso.
+- **Carretera e industria interior (`ambrosia`):** Una carretera abierta del interior soleado atravesando campos amplios hacia un complejo industrial con grandes torres y silos al fondo, aire polvoriento dorado, tendido eléctrico y nubes dramatizadas.
+- **Parque nacional y montaña (`kalaga`):** Un parque nacional salvaje al norte con colinas escarpadas, bosque denso de pinos altos, río sinuoso cristalino en el valle y senderos de tierra bajo iluminación atmosférica entre los árboles.
 
 ## Palettes (`Paleta y luz`)
 

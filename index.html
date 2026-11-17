@@ -1295,7 +1295,12 @@
     .viewfinder-frame[data-scene="boardwalk"] .vf-scene[data-scene="boardwalk"],
     .viewfinder-frame[data-scene="artdeco"] .vf-scene[data-scene="artdeco"],
     .viewfinder-frame[data-scene="classic-car"] .vf-scene[data-scene="classic-car"],
-    .viewfinder-frame[data-scene="rooftop"] .vf-scene[data-scene="rooftop"] {
+    .viewfinder-frame[data-scene="rooftop"] .vf-scene[data-scene="rooftop"],
+    .viewfinder-frame[data-scene="keys"] .vf-scene[data-scene="keys"],
+    .viewfinder-frame[data-scene="wetlands"] .vf-scene[data-scene="wetlands"],
+    .viewfinder-frame[data-scene="port"] .vf-scene[data-scene="port"],
+    .viewfinder-frame[data-scene="ambrosia"] .vf-scene[data-scene="ambrosia"],
+    .viewfinder-frame[data-scene="kalaga"] .vf-scene[data-scene="kalaga"] {
       display: block;
     }
 
@@ -2061,6 +2066,11 @@
                   <option value="artdeco">Calle con hoteles Art Déco e iluminación de neón</option>
                   <option value="classic-car">Deportivo clásico junto a la playa al anochecer</option>
                   <option value="rooftop">Azotea con vistas al skyline costero</option>
+                  <option value="keys">Cayos tropicales con puente y aguas turquesa</option>
+                  <option value="wetlands">Pantanos y manglares con hidrodeslizador</option>
+                  <option value="port">Motel costero y puerto decadente con neón</option>
+                  <option value="ambrosia">Carretera interior y zona industrial al atardecer</option>
+                  <option value="kalaga">Parque nacional boscoso con río y montañas</option>
                 </select>
               </div>
               <div class="step-footer">
@@ -2361,6 +2371,46 @@
                     <path d="M0 142h320" stroke="rgba(255, 78, 121, 0.7)" stroke-width="1.5"/>
                   </g>
 
+                  <g class="vf-scene" data-scene="keys">
+                    <rect x="0" y="132" width="320" height="48" fill="rgba(7, 20, 32, 0.78)"/>
+                    <path d="M0 120h320" stroke="#0b0814" stroke-width="5"/>
+                    <path d="M0 118h320" stroke="rgba(0, 240, 255, 0.55)" stroke-width="1.4"/>
+                    <path d="M28 122v26M76 122v26M124 122v26M172 122v26M220 122v26M268 122v26" stroke="#0b0814" stroke-width="4"/>
+                    <path d="M236 132l12-18h36l10 18Z" fill="#0c0816" stroke="rgba(255, 78, 121, 0.65)" stroke-width="1.2"/>
+                    <path d="M24 134c3-18 8-34 18-48M42 86c-12-2-22 2-30 10M42 86c10-8 22-8 30 0" stroke="#08060e" stroke-width="3" stroke-linecap="round" fill="none"/>
+                  </g>
+
+                  <g class="vf-scene" data-scene="wetlands">
+                    <rect x="0" y="134" width="320" height="46" fill="rgba(8, 14, 16, 0.84)"/>
+                    <path d="M10 136q24-62 54-78M32 136q12-46 28-64M260 136q-12-52-30-72M290 136q-18-44-42-62" stroke="#08060c" stroke-width="5" stroke-linecap="round" fill="none"/>
+                    <path d="M18 84q36-18 76 6M220 82q38-18 82 8" stroke="#0b0912" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.88"/>
+                    <path d="M62 146h54l10-12h-54Z" fill="#0b0814" stroke="rgba(0, 240, 255, 0.45)" stroke-width="1.2"/>
+                    <circle cx="72" cy="126" r="9" fill="none" stroke="rgba(255, 78, 121, 0.55)" stroke-width="1.4"/>
+                  </g>
+
+                  <g class="vf-scene" data-scene="port">
+                    <rect x="0" y="136" width="320" height="44" fill="#08060f"/>
+                    <path fill="#110b1c" d="M12 136V96h128v40ZM184 136v-26h78v26Z"/>
+                    <path d="M222 110V52l52 24M246 62v48" stroke="#0c0816" stroke-width="3" fill="none"/>
+                    <rect x="28" y="72" width="44" height="14" rx="2" fill="#0d0818" stroke="#ff4e79" stroke-width="1.6"/>
+                    <path d="M20 108h112" stroke="#00f0ff" stroke-width="1.4" opacity="0.7"/>
+                  </g>
+
+                  <g class="vf-scene" data-scene="ambrosia">
+                    <path fill="#100b19" d="M196 136V76h18v60Zm24 0V64h22v72Zm32 0V86h34v50Z"/>
+                    <path d="M205 76V52M231 64V44" stroke="#160f24" stroke-width="4"/>
+                    <rect x="0" y="134" width="320" height="46" fill="#090710"/>
+                    <path d="M84 180L150 134h24L256 180Z" fill="#130e1f"/>
+                    <path d="M162 136v42" stroke="#ffd166" stroke-width="1.6" stroke-dasharray="6 5" opacity="0.8"/>
+                  </g>
+
+                  <g class="vf-scene" data-scene="kalaga">
+                    <path fill="#140e24" d="M0 136L58 84l52 32 64-48 72 44 74-28v52Z"/>
+                    <path fill="#0b0814" d="M18 142l14-44 14 44Zm32 0l16-54 16 54Zm192 0l14-48 14 48Zm34 0l16-56 16 56Z"/>
+                    <rect x="0" y="140" width="320" height="40" fill="#07050c"/>
+                    <path d="M0 156q90-14 176 4t144-6" stroke="rgba(0, 240, 255, 0.4)" stroke-width="2" fill="none"/>
+                  </g>
+
                   <g class="vf-subject">
                     <path d="M126 180c3-28 14-44 34-44s31 16 34 44Z" fill="#0a0712" stroke="rgba(255, 255, 255, 0.52)" stroke-width="1.4"/>
                     <circle cx="160" cy="112" r="16" fill="#0a0712" stroke="rgba(0, 240, 255, 0.75)" stroke-width="1.4"/>
@@ -2589,6 +2639,31 @@
             'Con traje de lino claro y camisa desabrochada apoyado cerca de la barandilla, mirada tranquila y horizonte nocturno detrás',
             'Con vestido o camisa veraniega elegante, expresión carismática mirando a cámara y luces urbanas recortando los hombros',
             'De medio plano en actitud relajada sosteniendo gafas de sol en la mano con expresión segura al caer la tarde'
+          ],
+          keys: [
+            'Con camisa ligera desabrochada y gafas de sol oscuras apoyado en la barandilla del muelle con aire isleño relajado',
+            'Con camiseta veraniega y gorra hacia atrás mirando hacia la cámara sobre el puente costero con brisa marina',
+            'Con camisa de lino abierta y collar fino sosteniendo unas gafas en la mano bajo la luz dorada de los cayos'
+          ],
+          wetlands: [
+            'Con chaleco utilitario ligero y camiseta oscura mirando con actitud decidida desde la orilla pantanosa al caer la tarde',
+            'Con camisa de manga arremangada y gafas oscuras en postura firme rodeado de vegetación húmeda y reflejos dorados',
+            'De medio plano con ropa casual resistente y expresión serena mirando a cámara con bruma cálida de fondo'
+          ],
+          port: [
+            'Con cazadora ligera retro sobre camiseta blanca y mirada intensa junto al aparcamiento iluminado por neón de motel',
+            'Con camisa oscura abierta y cadena discreta apoyado en la barandilla metálica frente a las luces del puerto',
+            'De perfil tres cuartos girando el rostro hacia cámara con expresión confiada bajo destellos turquesa y rosa'
+          ],
+          ambrosia: [
+            'Con chaqueta vaquera o de cuero ligera y camiseta oscura mirando firme a cámara junto a la carretera abierta del interior',
+            'Con camisa de cuadros arremangada y gafas aviador apoyado con postura relajada en el arcén dorado al atardecer',
+            'De medio plano con actitud desafiante, polvo cálido en la luz de fondo y mirada directa al objetivo'
+          ],
+          kalaga: [
+            'Con sobrecamisa de franela abierta sobre camiseta clara respirando aire fresco frente al mirador boscoso del norte',
+            'Con chaqueta outdoor veraniega y gafas colgando del cuello mirando hacia el horizonte entre pinos y montañas',
+            'De medio plano en postura relajada junto al sendero panorámico con luz dorada filtrándose entre los árboles'
           ]
         },
         scratch: {
@@ -2611,6 +2686,31 @@
             'Protagonista de espaldas tres cuartos girando la mirada hacia cámara desde una terraza elevada con traje claro veraniego',
             'Personaje con chaqueta crema arremangada apoyado en la barandilla contemplando la bahía iluminada con copa en la barandilla',
             'Duo estilizado en azotea tropical con camisas fluidas de colores suaves y perfil iluminado por la ciudad costera'
+          ],
+          keys: [
+            'Navegante con camisa tropical arremangada al viento de pie junto al embarcadero mirando hacia el puente oceánico',
+            'Mujer con camisa de lino abierta y gafas oscuras sentada en el muelle de madera con los pies sobre el agua turquesa',
+            'Capitán moderno de estética isleña apoyado en una lancha deportiva con reloj dorado y postura segura'
+          ],
+          wetlands: [
+            'Explorador local con camiseta sin mangas y gorra gastada pilotando un hidrodeslizador entre manglares y bruma dorada',
+            'Personaje enigmático con chaqueta ligera abierta de pie sobre pasarela de madera frente al pantano tropical',
+            'Duo sobre lancha rápida de pantano observando el horizonte húmedo con luz rasante entre los cipreses'
+          ],
+          port: [
+            'Protagonista apoyado contra la puerta de un coche antiguo frente a un motel de carretera iluminado en neón violeta',
+            'Mujer con cazadora vaquera corta mirando de reojo bajo el letrero luminoso de un puerto pesquero nocturno',
+            'Personaje solitario con camisa abierta cargando una bolsa de viaje por la acera mojada del puerto costero'
+          ],
+          ambrosia: [
+            'Motero con chaleco de cuero y gafas oscuras apoyado en su moto custom junto a una carretera recta del interior al atardecer',
+            'Conductor con camisa de trabajo arremangada apoyado en una camioneta clásica frente a silos y nubes anaranjadas',
+            'Protagonista mirando al frente con actitud segura en mitad del asfalto caliente rodeado de campos secos y torres al fondo'
+          ],
+          kalaga: [
+            'Excursionista con sobrecamisa abierta, mochila al hombro y postura serena contemplando el valle boscoso desde lo alto',
+            'Conductor todoterreno apoyado en un 4x4 clásico junto a un río claro rodeado de pinos altos y neblina matinal',
+            'Protagonista en cabaña de madera entre montañas limpiando sus gafas mientras cae la luz dorada entre los árboles'
           ]
         }
       };
@@ -2629,7 +2729,17 @@
         'classic-car':
           'Escenario de fondo: un automóvil deportivo clásico descapotable aparcado junto a la playa al anochecer, con carrocería brillante reflejando las luces del cielo, arena costera, palmeras y el océano detrás.',
         rooftop:
-          'Escenario de fondo: una azotea elevada con barandilla elegante y plantas tropicales, abierta hacia vistas panorámicas al skyline costero iluminado y reflejos sobre la bahía.'
+          'Escenario de fondo: una azotea elevada con barandilla elegante y plantas tropicales, abierta hacia vistas panorámicas al skyline costero iluminado y reflejos sobre la bahía.',
+        keys:
+          'Escenario de fondo: una cadena de cayos tropicales conectados por un largo puente costero sobre aguas turquesa cristalinas, muelles de madera desgastada, casas elevadas sobre pilotes, palmeras bajas y alguna lancha amarrada en el horizonte.',
+        wetlands:
+          'Escenario de fondo: extensos pantanos subtropicales con manglares densos, árboles cubiertos de musgo colgante, aguas quietas con reflejos cálidos, bruma húmeda baja y la silueta de un hidrodeslizador en la orilla.',
+        port:
+          'Escenario de fondo: una zona portuaria y costera algo decadente con un motel bajo de carretera, acera húmeda con reflejos de neón, muelles de carga, grúas portuarias en segundo plano y ambiente nocturno tenso.',
+        ambrosia:
+          'Escenario de fondo: una carretera abierta del interior soleado atravesando campos amplios hacia un complejo industrial con grandes torres y silos al fondo, aire polvoriento dorado, tendido eléctrico y nubes dramatizadas.',
+        kalaga:
+          'Escenario de fondo: un parque nacional salvaje al norte con colinas escarpadas, bosque denso de pinos altos, río sinuoso cristalino en el valle y senderos de tierra bajo iluminación atmosférica entre los árboles.'
       };
 
       const PALETTE_PROMPTS = {

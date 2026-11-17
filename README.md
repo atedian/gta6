@@ -12,7 +12,7 @@ Herramienta web para crear prompts listos para usar en cualquier IA generadora d
 2. **Describe al protagonista con asistente instantáneo:**
    - Escribe vestimenta, pose o expresión en **Protagonista / Acción** o usa los botones **Sugerir idea**, **Mejorar detalle** y los atajos rápidos integrados para enriquecer la descripción sin descargas externas.
 3. **Personaliza escenario, paleta y formato:**
-   - **Escenario de fondo:** paseo marítimo con palmeras al atardecer, calle con hoteles Art Déco y neón, deportivo clásico junto a la playa o azotea frente al skyline costero.
+   - **Escenario de fondo:** 9 entornos representativos de costa, ciudad e interior: paseo marítimo al atardecer, hoteles Art Déco con neón, deportivo clásico en la playa, azotea frente al skyline, cayos tropicales con puente, pantanos y manglares, motel y puerto costero, carretera interior industrial y parque nacional boscoso con montañas.
    - **Paleta y luz:** atardecer coral y magenta, noche de neón turquesa y violeta o sol tropical vibrante de mediodía.
    - **Formato y composición:** `16:9` para miniatura de YouTube, `9:16` vertical o `1:1` cuadrado, eligiendo además si el protagonista va a la **izquierda**, en el **centro** o a la **derecha**.
 4. **Incluye título o deja la escena limpia:**
