@@ -1742,6 +1742,266 @@
     }
 
     /* ================================================================
+       EXAMPLES GALLERY + MODAL LIGHTBOX
+       ================================================================ */
+    .examples-section {
+      inline-size: 100%;
+      max-inline-size: 82rem;
+      margin-inline: auto;
+      padding-block: clamp(1.5rem, 3.5dvh, 2.5rem) clamp(2rem, 4.5dvh, 3.25rem);
+      padding-inline: clamp(1rem, 3vw, 2.5rem);
+      border-block-start: 1px solid var(--hairline);
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.95rem;
+    }
+
+    @media (min-width: 40rem) {
+      .examples-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 64rem) {
+      .examples-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .example-card {
+      min-inline-size: 0;
+      background: var(--surface-panel);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-md);
+      overflow: clip;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.18s ease;
+    }
+
+    .example-card:hover {
+      border-color: rgba(0, 240, 255, 0.55);
+    }
+
+    .example-media-btn {
+      position: relative;
+      display: block;
+      inline-size: 100%;
+      aspect-ratio: 16 / 9;
+      padding: 0;
+      border: 0;
+      border-block-end: 1px solid var(--hairline);
+      background: radial-gradient(circle at center, #140d23, #07050b);
+      cursor: zoom-in;
+      overflow: hidden;
+    }
+
+    .example-media-btn img {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+      transition: transform 0.28s ease;
+    }
+
+    .example-card[data-fit="contain"] .example-media-btn img {
+      object-fit: contain;
+    }
+
+    .example-media-btn:hover img {
+      transform: scale(1.03);
+    }
+
+    .example-ratio-tag {
+      position: absolute;
+      inset-block-start: 0.55rem;
+      inset-inline-end: 0.55rem;
+      padding: 0.18rem 0.48rem;
+      border-radius: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(9, 7, 15, 0.84);
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      pointer-events: none;
+    }
+
+    .example-body {
+      padding: 0.78rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      flex: 1;
+    }
+
+    .example-copy {
+      min-inline-size: 0;
+      display: grid;
+      gap: 0.14rem;
+    }
+
+    .example-title {
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.25;
+    }
+
+    .example-meta {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .btn-try-recipe {
+      flex: none;
+      font: inherit;
+      font-family: var(--font-mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      min-block-size: 36px;
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0, 240, 255, 0.5);
+      background: rgba(0, 240, 255, 0.09);
+      color: var(--cyan);
+      cursor: pointer;
+      transition: background-color 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+    }
+
+    @media (pointer: coarse) {
+      .btn-try-recipe {
+        min-block-size: 44px;
+      }
+    }
+
+    .btn-try-recipe:hover {
+      background: var(--cyan);
+      color: var(--ink-dark);
+      border-color: var(--cyan);
+    }
+
+    /* Native Lightbox Dialog */
+    .example-dialog {
+      inline-size: min(94vw, 64rem);
+      max-inline-size: 64rem;
+      max-block-size: 92dvh;
+      margin: auto;
+      padding: 0;
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-md);
+      background: var(--surface-panel);
+      color: var(--text-primary);
+      box-shadow: 0 28px 68px -18px rgba(0, 0, 0, 0.95);
+    }
+
+    .example-dialog[open] {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    dialog:modal {
+      overscroll-behavior: contain;
+    }
+
+    dialog::backdrop {
+      overflow: hidden;
+      overscroll-behavior: contain;
+      background: rgba(7, 5, 11, 0.86);
+      backdrop-filter: blur(6px);
+    }
+
+    .dialog-head {
+      padding: 0.75rem 1rem;
+      border-block-end: 1px solid var(--hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .dialog-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .dialog-close {
+      font: inherit;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      min-block-size: 38px;
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--hairline);
+      background: var(--surface-well);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    @media (pointer: coarse) {
+      .dialog-close {
+        min-block-size: 44px;
+      }
+    }
+
+    .dialog-close:hover {
+      border-color: var(--coral);
+      color: #ffffff;
+    }
+
+    .dialog-stage {
+      min-block-size: 0;
+      background: #060409;
+      display: grid;
+      place-items: center;
+      padding: 0.65rem;
+      overflow: auto;
+    }
+
+    .dialog-stage img {
+      display: block;
+      max-inline-size: 100%;
+      max-block-size: 68dvh;
+      inline-size: auto;
+      block-size: auto;
+      border-radius: 0.25rem;
+      object-fit: contain;
+    }
+
+    .dialog-foot {
+      padding: 0.75rem 1rem;
+      border-block-start: 1px solid var(--hairline);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem 1rem;
+    }
+
+    .dialog-caption {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* ================================================================
        FOOTER: Atedian + modern social & web icons only
        ================================================================ */
     .site-footer {
@@ -1842,8 +2102,13 @@
       .viewfinder-frame,
       .vf-subject,
       .vf-safe-zone,
+      .example-media-btn img,
       .select-input::picker(select) {
         transition: none;
+      }
+
+      .example-media-btn:hover img {
+        transform: none;
       }
     }
 
@@ -1851,11 +2116,15 @@
       .cover-stage,
       .panel,
       .step-card,
+      .example-card,
+      .example-dialog,
       .ratio-label,
       .style-label,
       .variant-pill,
       .assist-chip,
       .btn-assist,
+      .btn-try-recipe,
+      .dialog-close,
       .prompt-textarea,
       .ai-chip,
       .social-link,
@@ -2517,6 +2786,115 @@
       </aside>
     </div>
   </main>
+
+  <section id="ejemplos" class="examples-section" aria-labelledby="ejemplos-titulo">
+    <div class="studio-intro">
+      <h2 id="ejemplos-titulo" class="studio-heading">Ejemplos generados</h2>
+      <p class="studio-sub">Resultados reales creados con prompts del estudio</p>
+    </div>
+
+    <div class="examples-grid">
+      <article class="example-card" data-fit="cover">
+        <button type="button" class="example-media-btn" data-example-id="paseo-cromo" aria-label="Ampliar ejemplo: Paseo marítimo al atardecer">
+          <img src="./assets/ejemplos/paseo-cromo-16-9.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Ilustración tropical al atardecer en paseo marítimo con camisa blanca abierta y título cromado NOCHES DE MIAMI">
+          <span class="example-ratio-tag" aria-hidden="true">16:9</span>
+        </button>
+        <div class="example-body">
+          <div class="example-copy">
+            <h3 class="example-title">Paseo marítimo al atardecer</h3>
+            <p class="example-meta">Atardecer coral y Cromo retro</p>
+          </div>
+          <button type="button" class="btn-try-recipe" data-load-example="paseo-cromo">Probar ajuste</button>
+        </div>
+      </article>
+
+      <article class="example-card" data-fit="cover">
+        <button type="button" class="example-media-btn" data-example-id="artdeco-neon" aria-label="Ampliar ejemplo: Hoteles Art Déco y neón">
+          <img src="./assets/ejemplos/artdeco-neon-16-9.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Pareja con estilismo nocturno en calle Art Déco iluminada con neones cian y magenta y rótulo NOCHES DE MIAMI">
+          <span class="example-ratio-tag" aria-hidden="true">16:9</span>
+        </button>
+        <div class="example-body">
+          <div class="example-copy">
+            <h3 class="example-title">Hoteles Art Déco y neón</h3>
+            <p class="example-meta">Noche de neón y Neón 80s</p>
+          </div>
+          <button type="button" class="btn-try-recipe" data-load-example="artdeco-neon">Probar ajuste</button>
+        </div>
+      </article>
+
+      <article class="example-card" data-fit="cover">
+        <button type="button" class="example-media-btn" data-example-id="deportivo-playa" aria-label="Ampliar ejemplo: Deportivo clásico en la playa">
+          <img src="./assets/ejemplos/deportivo-atardecer-16-9.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Conductor con camisa hawaiana apoyado en descapotable clásico frente al océano al atardecer sin texto">
+          <span class="example-ratio-tag" aria-hidden="true">16:9</span>
+        </button>
+        <div class="example-body">
+          <div class="example-copy">
+            <h3 class="example-title">Deportivo clásico en la playa</h3>
+            <p class="example-meta">Atardecer coral sin texto</p>
+          </div>
+          <button type="button" class="btn-try-recipe" data-load-example="deportivo-playa">Probar ajuste</button>
+        </div>
+      </article>
+
+      <article class="example-card" data-fit="cover">
+        <button type="button" class="example-media-btn" data-example-id="puerto-motel" aria-label="Ampliar ejemplo: Motel costero y puerto">
+          <img src="./assets/ejemplos/puerto-editorial-16-9.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Protagonista apoyado en coche junto a motel y grúas portuarias nocturnas con título CAPÍTULO 01 a la derecha">
+          <span class="example-ratio-tag" aria-hidden="true">16:9</span>
+        </button>
+        <div class="example-body">
+          <div class="example-copy">
+            <h3 class="example-title">Motel costero y puerto</h3>
+            <p class="example-meta">Noche de neón y Editorial</p>
+          </div>
+          <button type="button" class="btn-try-recipe" data-load-example="puerto-motel">Probar ajuste</button>
+        </div>
+      </article>
+
+      <article class="example-card" data-fit="contain">
+        <button type="button" class="example-media-btn" data-example-id="cayos-vertical" aria-label="Ampliar ejemplo: Ruta por los Cayos">
+          <img src="./assets/ejemplos/cayos-cromo-9-16.webp" width="720" height="1280" loading="lazy" decoding="async" alt="Cartel vertical 9:16 de mujer sentada en muelle de madera sobre agua turquesa bajo puente costero con título RUTA POR LOS CAYOS">
+          <span class="example-ratio-tag" aria-hidden="true">9:16</span>
+        </button>
+        <div class="example-body">
+          <div class="example-copy">
+            <h3 class="example-title">Ruta por los Cayos</h3>
+            <p class="example-meta">Sol tropical y Cromo retro</p>
+          </div>
+          <button type="button" class="btn-try-recipe" data-load-example="cayos-vertical">Probar ajuste</button>
+        </div>
+      </article>
+
+      <article class="example-card" data-fit="contain">
+        <button type="button" class="example-media-btn" data-example-id="pantano-cuadrado" aria-label="Ampliar ejemplo: Pantanos con hidrodeslizador">
+          <img src="./assets/ejemplos/pantano-lancha-1-1.webp" width="1080" height="1080" loading="lazy" decoding="async" alt="Ilustración cuadrada 1:1 de piloto en hidrodeslizador atravesando manglares subtropicales al atardecer">
+          <span class="example-ratio-tag" aria-hidden="true">1:1</span>
+        </button>
+        <div class="example-body">
+          <div class="example-copy">
+            <h3 class="example-title">Pantanos con hidrodeslizador</h3>
+            <p class="example-meta">Atardecer y Sin copyright</p>
+          </div>
+          <button type="button" class="btn-try-recipe" data-load-example="pantano-cuadrado">Probar ajuste</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <dialog id="example-dialog" class="example-dialog" closedby="any" aria-labelledby="dialog-title">
+    <div class="dialog-head">
+      <h2 id="dialog-title" class="dialog-title">Vista previa del ejemplo</h2>
+      <form method="dialog">
+        <button type="submit" class="dialog-close" autofocus>Cerrar</button>
+      </form>
+    </div>
+    <div class="dialog-stage">
+      <img id="dialog-img" fetchpriority="low" decoding="async" alt="">
+    </div>
+    <div class="dialog-foot">
+      <p id="dialog-caption" class="dialog-caption"></p>
+      <button type="button" id="dialog-apply-btn" class="btn-step-next">Cargar en el estudio</button>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <a class="footer-brand" href="https://atedian.com/" target="_blank" rel="noopener noreferrer">
