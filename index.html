@@ -3222,6 +3222,123 @@
         };
       }
 
+      const EXAMPLE_RECIPES = {
+        'paseo-cromo': {
+          title: 'Paseo marítimo al atardecer',
+          caption: '16:9, Atardecer coral y rótulo Cromo retro (NOCHES DE MIAMI)',
+          src: './assets/ejemplos/paseo-cromo-16-9.webp',
+          width: 1280,
+          height: 720,
+          alt: 'Ilustración tropical al atardecer en paseo marítimo con camisa blanca abierta y título cromado NOCHES DE MIAMI',
+          mode: 'scratch',
+          subject: 'Protagonista con camisa de lino blanca abierta y gafas de sol oscuras apoyado en el paseo junto al mar al atardecer',
+          scene: 'boardwalk',
+          palette: 'sunset-coral',
+          format: '16:9',
+          subjectPos: 'right',
+          textMode: 'title',
+          titleText: 'NOCHES DE MIAMI',
+          titleStyle: 'chrome',
+          titlePos: 'left',
+          variant: 'gta6'
+        },
+        'artdeco-neon': {
+          title: 'Hoteles Art Déco y neón',
+          caption: '16:9, Noche de neón y rótulo Neón 80s (NOCHES DE MIAMI)',
+          src: './assets/ejemplos/artdeco-neon-16-9.webp',
+          width: 1280,
+          height: 720,
+          alt: 'Pareja con estilismo nocturno en calle Art Déco iluminada con neones cian y magenta y rótulo NOCHES DE MIAMI',
+          mode: 'scratch',
+          subject: 'Pareja protagonista con estilismo veraniego ochentero, chaqueta pastel arremangada y gafas oscuras posando bajo rótulos geométricos de neón',
+          scene: 'artdeco',
+          palette: 'neon-night',
+          format: '16:9',
+          subjectPos: 'right',
+          textMode: 'title',
+          titleText: 'NOCHES DE MIAMI',
+          titleStyle: 'neon',
+          titlePos: 'left',
+          variant: 'gta6'
+        },
+        'deportivo-playa': {
+          title: 'Deportivo clásico en la playa',
+          caption: '16:9, Atardecer cálido coral sin texto',
+          src: './assets/ejemplos/deportivo-atardecer-16-9.webp',
+          width: 1280,
+          height: 720,
+          alt: 'Conductor con camisa hawaiana apoyado en descapotable clásico frente al océano al atardecer sin texto',
+          mode: 'scratch',
+          subject: 'Conductor apoyado en un descapotable clásico con camisa tropical abierta, reloj dorado y gafas de sol reflejando el cielo',
+          scene: 'classic-car',
+          palette: 'sunset-coral',
+          format: '16:9',
+          subjectPos: 'right',
+          textMode: 'none',
+          titleText: '',
+          titleStyle: 'neon',
+          titlePos: 'left',
+          variant: 'gta6'
+        },
+        'puerto-motel': {
+          title: 'Motel costero y puerto',
+          caption: '16:9, Protagonista izquierda y rótulo Editorial derecha (CAPÍTULO 01)',
+          src: './assets/ejemplos/puerto-editorial-16-9.webp',
+          width: 1280,
+          height: 720,
+          alt: 'Protagonista apoyado en coche junto a motel y grúas portuarias nocturnas con título CAPÍTULO 01 a la derecha',
+          mode: 'scratch',
+          subject: 'Protagonista apoyado contra la puerta de un coche antiguo con cazadora ligera retro y mirada intensa bajo luces de neón',
+          scene: 'port',
+          palette: 'neon-night',
+          format: '16:9',
+          subjectPos: 'left',
+          textMode: 'title',
+          titleText: 'CAPÍTULO 01',
+          titleStyle: 'editorial',
+          titlePos: 'right',
+          variant: 'gta6'
+        },
+        'cayos-vertical': {
+          title: 'Ruta por los Cayos',
+          caption: '9:16 vertical, Sol tropical y rótulo Cromo retro centrado (RUTA POR LOS CAYOS)',
+          src: './assets/ejemplos/cayos-cromo-9-16.webp',
+          width: 720,
+          height: 1280,
+          alt: 'Cartel vertical 9:16 de mujer sentada en muelle de madera sobre agua turquesa bajo puente costero con título RUTA POR LOS CAYOS',
+          mode: 'scratch',
+          subject: 'Mujer con camisa de lino abierta y gafas oscuras sentada en el muelle de madera sobre aguas turquesa cristalinas, sonriendo al sol',
+          scene: 'keys',
+          palette: 'tropical-noon',
+          format: '9:16',
+          subjectPos: 'center',
+          textMode: 'title',
+          titleText: 'RUTA POR LOS CAYOS',
+          titleStyle: 'chrome',
+          titlePos: 'center',
+          variant: 'gta6'
+        },
+        'pantano-cuadrado': {
+          title: 'Pantanos con hidrodeslizador',
+          caption: '1:1 cuadrado, Atardecer coral en modo Sin copyright',
+          src: './assets/ejemplos/pantano-lancha-1-1.webp',
+          width: 1080,
+          height: 1080,
+          alt: 'Ilustración cuadrada 1:1 de piloto en hidrodeslizador atravesando manglares subtropicales al atardecer',
+          mode: 'scratch',
+          subject: 'Explorador local con camiseta sin mangas y gorra gastada pilotando un hidrodeslizador entre manglares y bruma dorada',
+          scene: 'wetlands',
+          palette: 'sunset-coral',
+          format: '1:1',
+          subjectPos: 'center',
+          textMode: 'none',
+          titleText: '',
+          titleStyle: 'neon',
+          titlePos: 'center',
+          variant: 'safe'
+        }
+      };
+
       const form = document.getElementById('prompt-form');
       const steps = Array.from(form.querySelectorAll('details.step-card'));
       const subjectEl = document.getElementById('subject');
@@ -3251,12 +3368,18 @@
       const variantSwitchEl = document.getElementById('variant-switch');
       const metaEl = document.getElementById('prompt-meta');
       const copyStatusEl = document.getElementById('copy-status');
+      const exampleDialog = document.getElementById('example-dialog');
+      const dialogTitleEl = document.getElementById('dialog-title');
+      const dialogImgEl = document.getElementById('dialog-img');
+      const dialogCaptionEl = document.getElementById('dialog-caption');
+      const dialogApplyBtn = document.getElementById('dialog-apply-btn');
 
       const copyTimers = new WeakMap();
       let lastAnnouncement = '';
       let lastIdeaIndex = -1;
       let userPickedSubjectPos = false;
       let userPickedTitlePos = false;
+      let activeExampleId = '';
 
       /* Exclusive details fallback for older browsers without details[name] */
       if (!Object.hasOwn(HTMLDetailsElement.prototype, 'name')) {
@@ -3305,8 +3428,63 @@
       }
 
       function setRadioValue(name, value) {
-        const target = form.querySelector(`input[name="${name}"][value="${CSS.escape(value)}"]`);
+        const target = document.querySelector(`input[name="${CSS.escape(name)}"][value="${CSS.escape(value)}"]`);
         if (target) target.checked = true;
+      }
+
+      function focusStudioAfterRecipe() {
+        const studioHeading = document.getElementById('estudio-titulo');
+        const copyBtn = document.getElementById('copy-btn');
+        if (studioHeading) {
+          studioHeading.scrollIntoView({ block: 'start' });
+        }
+        if (copyBtn) {
+          copyBtn.focus({ preventScroll: true });
+        }
+      }
+
+      function applyExampleRecipe(exampleId, shouldFocusStudio = true) {
+        const recipe = EXAMPLE_RECIPES[exampleId];
+        if (!recipe) return;
+
+        setRadioValue('mode', recipe.mode);
+        subjectEl.value = recipe.subject;
+        sceneEl.value = recipe.scene;
+        paletteEl.value = recipe.palette;
+        setRadioValue('format', recipe.format);
+        setRadioValue('subject-pos', recipe.subjectPos);
+        setRadioValue('text-mode', recipe.textMode);
+        titleTextEl.value = recipe.titleText;
+        setRadioValue('title-style', recipe.titleStyle);
+        setRadioValue('title-pos', recipe.titlePos);
+        setRadioValue('prompt-variant', recipe.variant);
+
+        userPickedSubjectPos = true;
+        userPickedTitlePos = true;
+
+        for (const card of steps) {
+          card.dataset.done = 'true';
+        }
+        openStep(1);
+        buildPrompt();
+
+        if (shouldFocusStudio) {
+          focusStudioAfterRecipe();
+        }
+      }
+
+      function openExampleDialog(exampleId) {
+        const recipe = EXAMPLE_RECIPES[exampleId];
+        if (!recipe || !exampleDialog) return;
+
+        activeExampleId = exampleId;
+        dialogTitleEl.textContent = recipe.title;
+        dialogImgEl.src = recipe.src;
+        dialogImgEl.width = recipe.width;
+        dialogImgEl.height = recipe.height;
+        dialogImgEl.alt = recipe.alt;
+        dialogCaptionEl.textContent = recipe.caption;
+        exampleDialog.showModal();
       }
 
       function buildPrompt() {
@@ -3654,6 +3832,51 @@
         buildPrompt();
         subjectEl.focus({ preventScroll: true });
       });
+
+      document.querySelectorAll('.example-media-btn[data-example-id]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          openExampleDialog(btn.dataset.exampleId);
+        });
+      });
+
+      document.querySelectorAll('[data-load-example]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          applyExampleRecipe(btn.dataset.loadExample, true);
+        });
+      });
+
+      if (dialogApplyBtn && exampleDialog) {
+        dialogApplyBtn.addEventListener('click', () => {
+          if (activeExampleId) {
+            applyExampleRecipe(activeExampleId, false);
+          }
+          exampleDialog.close('apply');
+        });
+
+        exampleDialog.addEventListener('close', () => {
+          const action = exampleDialog.returnValue;
+          exampleDialog.returnValue = '';
+          if (action === 'apply') {
+            requestAnimationFrame(focusStudioAfterRecipe);
+          }
+        });
+
+        if (!('closedBy' in HTMLDialogElement.prototype)) {
+          let pressedOutside = false;
+          const isOutsideDialog = (event) => {
+            const r = exampleDialog.getBoundingClientRect();
+            return event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom;
+          };
+          exampleDialog.addEventListener('pointerdown', (event) => {
+            pressedOutside = isOutsideDialog(event);
+          });
+          exampleDialog.addEventListener('pointerup', (event) => {
+            if (pressedOutside && isOutsideDialog(event)) {
+              exampleDialog.close();
+            }
+          });
+        }
+      }
 
       if ('CommandEvent' in window) {
         document.addEventListener(
