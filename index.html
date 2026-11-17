@@ -1481,9 +1481,71 @@
     .prompt-label-row {
       display: flex;
       flex-wrap: wrap;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
-      gap: 0.35rem 0.75rem;
+      gap: 0.35rem 0.65rem;
+    }
+
+    .variant-switch {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.36rem;
+    }
+
+    .variant-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.38rem;
+      min-block-size: 34px;
+      padding: 0.28rem 0.55rem;
+      border-radius: var(--radius-sm);
+      background: var(--surface-well);
+      border: 1px solid rgba(138, 114, 189, 0.48);
+      font-family: var(--font-mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+    }
+
+    @media (pointer: coarse) {
+      .variant-pill {
+        min-block-size: 44px;
+      }
+    }
+
+    .variant-pill:hover {
+      border-color: rgba(0, 240, 255, 0.65);
+      color: #ffffff;
+    }
+
+    .segment-item input:checked + .variant-pill {
+      background: linear-gradient(135deg, rgba(255, 78, 121, 0.2), rgba(0, 240, 255, 0.14));
+      border-color: rgba(255, 78, 121, 0.85);
+      color: #ffffff;
+    }
+
+    .segment-item input[value="safe"]:checked + .variant-pill {
+      background: rgba(0, 240, 255, 0.13);
+      border-color: var(--cyan);
+    }
+
+    .segment-item input:checked + .variant-pill .segment-dot {
+      background: var(--coral);
+      box-shadow: 0 0 8px var(--coral);
+    }
+
+    .segment-item input[value="safe"]:checked + .variant-pill .segment-dot {
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    .segment-item input:focus-visible + .variant-pill {
+      outline: 3px solid var(--cyan);
+      outline-offset: 2px;
     }
 
     .field-label {
@@ -1504,9 +1566,9 @@
       inline-size: 100%;
       max-inline-size: 100%;
       min-inline-size: 0;
-      min-block-size: 7.75rem;
-      max-block-size: clamp(7.75rem, 20dvh, 11rem);
-      padding: 0.75rem 0.9rem;
+      min-block-size: 6.5rem;
+      max-block-size: clamp(6.5rem, 18dvh, 9.8rem);
+      padding: 0.68rem 0.85rem;
       border-radius: var(--radius-sm);
       border: 1px solid rgba(138, 114, 189, 0.58);
       background: var(--surface-well);
@@ -2310,6 +2372,22 @@
             <div class="prompt-label-row">
               <label id="output-heading" class="field-label" for="prompt-output">Prompt generado</label>
               <p id="prompt-meta" class="prompt-meta">0 caracteres</p>
+            </div>
+            <div id="variant-switch" class="variant-switch" role="radiogroup" aria-label="Versión del prompt">
+              <div class="segment-item">
+                <input class="sr-only-input" type="radio" id="variant-gta6" name="prompt-variant" value="gta6" checked>
+                <label class="variant-pill" for="variant-gta6">
+                  <span class="segment-dot" aria-hidden="true"></span>
+                  <span>Estilo GTA 6</span>
+                </label>
+              </div>
+              <div class="segment-item">
+                <input class="sr-only-input" type="radio" id="variant-safe" name="prompt-variant" value="safe">
+                <label class="variant-pill" for="variant-safe">
+                  <span class="segment-dot" aria-hidden="true"></span>
+                  <span>Sin copyright</span>
+                </label>
+              </div>
             </div>
             <textarea
               id="prompt-output"
