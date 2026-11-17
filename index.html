@@ -767,10 +767,21 @@
       resize: none;
     }
 
+    .mini-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.69rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-block-end: 0.3rem;
+    }
+
     .style-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 0.4rem;
+      gap: 0.36rem;
     }
 
     @media (min-width: 26rem) {
@@ -784,18 +795,24 @@
       align-items: center;
       justify-content: center;
       gap: 0.38rem;
-      min-block-size: 42px;
-      padding: 0.4rem 0.55rem;
+      min-block-size: 38px;
+      padding: 0.34rem 0.5rem;
       border-radius: var(--radius-sm);
       background: var(--surface-well);
       border: 1px solid rgba(138, 114, 189, 0.48);
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       font-weight: 700;
       color: var(--text-secondary);
       cursor: pointer;
       text-align: center;
       transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+    }
+
+    @media (pointer: coarse) {
+      .style-label {
+        min-block-size: 44px;
+      }
     }
 
     .style-label:hover {
@@ -1090,9 +1107,9 @@
     .ratio-label {
       display: flex;
       align-items: center;
-      gap: 0.68rem;
-      min-block-size: 46px;
-      padding: 0.44rem 0.72rem;
+      gap: 0.65rem;
+      min-block-size: 42px;
+      padding: 0.36rem 0.68rem;
       border-radius: var(--radius-sm);
       background: var(--surface-well);
       border: 1px solid rgba(138, 114, 189, 0.52);
@@ -1102,7 +1119,7 @@
 
     @media (pointer: coarse) {
       .ratio-label {
-        min-block-size: 48px;
+        min-block-size: 46px;
       }
     }
 
@@ -1287,22 +1304,49 @@
       transform-origin: center bottom;
     }
 
-    .viewfinder-frame[data-format="16:9"] .vf-subject {
-      transform: translateX(46px);
+    /* 16:9 protagonist placement */
+    .viewfinder-frame[data-format="16:9"][data-subject-pos="left"] .vf-subject {
+      transform: translateX(-62px);
     }
 
-    .viewfinder-frame[data-format="9:16"] .vf-subject {
+    .viewfinder-frame[data-format="16:9"][data-subject-pos="center"] .vf-subject {
+      transform: translateX(0);
+    }
+
+    .viewfinder-frame[data-format="16:9"][data-subject-pos="right"] .vf-subject {
+      transform: translateX(62px);
+    }
+
+    /* 9:16 protagonist placement (narrow crop safe range) */
+    .viewfinder-frame[data-format="9:16"][data-subject-pos="left"] .vf-subject {
+      transform: translate(-24px, 6px) scale(0.92);
+    }
+
+    .viewfinder-frame[data-format="9:16"][data-subject-pos="center"] .vf-subject {
       transform: translate(0, 6px) scale(0.92);
     }
 
-    .viewfinder-frame[data-format="1:1"] .vf-subject {
+    .viewfinder-frame[data-format="9:16"][data-subject-pos="right"] .vf-subject {
+      transform: translate(24px, 6px) scale(0.92);
+    }
+
+    /* 1:1 protagonist placement */
+    .viewfinder-frame[data-format="1:1"][data-subject-pos="left"] .vf-subject {
+      transform: translate(-38px, 4px) scale(0.96);
+    }
+
+    .viewfinder-frame[data-format="1:1"][data-subject-pos="center"] .vf-subject {
       transform: translate(0, 4px) scale(0.96);
+    }
+
+    .viewfinder-frame[data-format="1:1"][data-subject-pos="right"] .vf-subject {
+      transform: translate(38px, 4px) scale(0.96);
     }
 
     .vf-safe-zone {
       position: absolute;
       inset-block: 14%;
-      inset-inline-start: 7%;
+      inset-inline-start: 6%;
       z-index: 2;
       inline-size: 44%;
       border: 1px dashed rgba(255, 255, 255, 0.55);
@@ -1320,13 +1364,39 @@
       background: rgba(9, 7, 15, 0.34);
       opacity: 0;
       overflow: hidden;
-      overflow-wrap: anywhere;
+      overflow-wrap: break-word;
       pointer-events: none;
       transition: opacity 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
     }
 
     .viewfinder-frame[data-format="16:9"] .vf-safe-zone {
       opacity: 1;
+    }
+
+    .viewfinder-frame[data-title-pos="left"] .vf-safe-zone {
+      inset-inline-start: 6%;
+      inset-inline-end: auto;
+      inline-size: 44%;
+      transform: none;
+    }
+
+    .viewfinder-frame[data-title-pos="center"] .vf-safe-zone {
+      inset-inline-start: 50%;
+      inset-inline-end: auto;
+      inline-size: 56%;
+      transform: translateX(-50%);
+    }
+
+    .viewfinder-frame[data-title-pos="right"] .vf-safe-zone {
+      inset-inline-start: auto;
+      inset-inline-end: 6%;
+      inline-size: 44%;
+      transform: none;
+    }
+
+    .viewfinder-frame[data-format="16:9"][data-subject-pos="center"][data-title-pos="center"] .vf-safe-zone {
+      inset-block: 10% auto;
+      min-block-size: 32%;
     }
 
     .viewfinder-frame[data-has-title="true"] .vf-safe-zone {
@@ -1341,20 +1411,44 @@
       line-height: 1.05;
     }
 
-    .viewfinder-frame[data-has-title="true"][data-format="9:16"] .vf-safe-zone {
+    .viewfinder-frame[data-has-title="true"][data-format="9:16"] .vf-safe-zone,
+    .viewfinder-frame[data-has-title="true"][data-format="1:1"] .vf-safe-zone {
       inset-block: 8% auto;
-      inset-inline: 8%;
-      inline-size: auto;
       min-block-size: 24%;
       font-size: 0.78rem;
     }
 
     .viewfinder-frame[data-has-title="true"][data-format="1:1"] .vf-safe-zone {
-      inset-block: 8% auto;
-      inset-inline: 10%;
-      inline-size: auto;
-      min-block-size: 23%;
       font-size: 0.92rem;
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-format="9:16"][data-title-pos="left"] .vf-safe-zone,
+    .viewfinder-frame[data-has-title="true"][data-format="1:1"][data-title-pos="left"] .vf-safe-zone {
+      inset-inline-start: 7%;
+      inset-inline-end: auto;
+      inline-size: 72%;
+      justify-items: start;
+      text-align: left;
+      transform: none;
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-format="9:16"][data-title-pos="center"] .vf-safe-zone,
+    .viewfinder-frame[data-has-title="true"][data-format="1:1"][data-title-pos="center"] .vf-safe-zone {
+      inset-inline-start: 50%;
+      inline-size: 86%;
+      justify-items: center;
+      text-align: center;
+      transform: translateX(-50%);
+    }
+
+    .viewfinder-frame[data-has-title="true"][data-format="9:16"][data-title-pos="right"] .vf-safe-zone,
+    .viewfinder-frame[data-has-title="true"][data-format="1:1"][data-title-pos="right"] .vf-safe-zone {
+      inset-inline-start: auto;
+      inset-inline-end: 7%;
+      inline-size: 72%;
+      justify-items: end;
+      text-align: right;
+      transform: none;
     }
 
     .viewfinder-frame[data-has-title="true"][data-title-style="neon"] .vf-safe-zone {
@@ -1984,7 +2078,7 @@
                       </span>
                       <span class="ratio-copy">
                         <span class="ratio-title">16:9 Miniatura YouTube</span>
-                        <span class="ratio-desc">Sujeto a la derecha y espacio izquierdo para título</span>
+                        <span class="ratio-desc">Panorámico pensado para miniatura o portada</span>
                       </span>
                       <span class="ratio-check" aria-hidden="true">
                         <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -2006,7 +2100,7 @@
                       </span>
                       <span class="ratio-copy">
                         <span class="ratio-title">9:16 Vertical (Shorts / Reels / TikTok)</span>
-                        <span class="ratio-desc">Sujeto centrado con aire superior</span>
+                        <span class="ratio-desc">Vertical optimizado para pantalla móvil</span>
                       </span>
                       <span class="ratio-check" aria-hidden="true">
                         <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -2027,7 +2121,7 @@
                       </span>
                       <span class="ratio-copy">
                         <span class="ratio-title">1:1 Cuadrado</span>
-                        <span class="ratio-desc">Encuadre centrado y equilibrado</span>
+                        <span class="ratio-desc">Cuadrado equilibrado para perfil o feed</span>
                       </span>
                       <span class="ratio-check" aria-hidden="true">
                         <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -2035,6 +2129,24 @@
                         </svg>
                       </span>
                     </label>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="mini-label" id="subject-pos-label">Lado del protagonista</span>
+                  <div class="style-grid" role="radiogroup" aria-labelledby="subject-pos-label">
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="subject-pos-left" name="subject-pos" value="left">
+                      <label class="style-label" for="subject-pos-left">Izquierda</label>
+                    </div>
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="subject-pos-center" name="subject-pos" value="center">
+                      <label class="style-label" for="subject-pos-center">Centro</label>
+                    </div>
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="subject-pos-right" name="subject-pos" value="right" checked>
+                      <label class="style-label" for="subject-pos-right">Derecha</label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2095,30 +2207,50 @@
                     aria-describedby="title-hint">
                 </div>
 
-                <div class="style-grid" role="radiogroup" aria-label="Estilo visual de las letras">
-                  <div class="segment-item">
-                    <input class="sr-only-input" type="radio" id="title-style-neon" name="title-style" value="neon" checked>
-                    <label class="style-label" for="title-style-neon">
-                      <span class="style-swatch" data-swatch="neon" aria-hidden="true"></span>
-                      <span>Neón 80s</span>
-                    </label>
-                  </div>
-                  <div class="segment-item">
-                    <input class="sr-only-input" type="radio" id="title-style-chrome" name="title-style" value="chrome">
-                    <label class="style-label" for="title-style-chrome">
-                      <span class="style-swatch" data-swatch="chrome" aria-hidden="true"></span>
-                      <span>Cromo retro</span>
-                    </label>
-                  </div>
-                  <div class="segment-item">
-                    <input class="sr-only-input" type="radio" id="title-style-editorial" name="title-style" value="editorial">
-                    <label class="style-label" for="title-style-editorial">
-                      <span class="style-swatch" data-swatch="editorial" aria-hidden="true"></span>
-                      <span>Editorial</span>
-                    </label>
+                <div>
+                  <span class="mini-label" id="title-style-label">Estilo visual de las letras</span>
+                  <div class="style-grid" role="radiogroup" aria-labelledby="title-style-label">
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="title-style-neon" name="title-style" value="neon" checked>
+                      <label class="style-label" for="title-style-neon">
+                        <span class="style-swatch" data-swatch="neon" aria-hidden="true"></span>
+                        <span>Neón 80s</span>
+                      </label>
+                    </div>
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="title-style-chrome" name="title-style" value="chrome">
+                      <label class="style-label" for="title-style-chrome">
+                        <span class="style-swatch" data-swatch="chrome" aria-hidden="true"></span>
+                        <span>Cromo retro</span>
+                      </label>
+                    </div>
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="title-style-editorial" name="title-style" value="editorial">
+                      <label class="style-label" for="title-style-editorial">
+                        <span class="style-swatch" data-swatch="editorial" aria-hidden="true"></span>
+                        <span>Editorial</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
-                <p id="title-hint" class="field-hint">Útil para miniaturas de YouTube o portadas con texto integrado.</p>
+
+                <div>
+                  <span class="mini-label" id="title-pos-label">Lado de las letras</span>
+                  <div class="style-grid" role="radiogroup" aria-labelledby="title-pos-label">
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="title-pos-left" name="title-pos" value="left" checked>
+                      <label class="style-label" for="title-pos-left">Izquierda</label>
+                    </div>
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="title-pos-center" name="title-pos" value="center">
+                      <label class="style-label" for="title-pos-center">Centro</label>
+                    </div>
+                    <div class="segment-item">
+                      <input class="sr-only-input" type="radio" id="title-pos-right" name="title-pos" value="right">
+                      <label class="style-label" for="title-pos-right">Derecha</label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </details>
@@ -2133,7 +2265,7 @@
               <span id="vf-mode-tag" class="viewfinder-tag">Con foto adjunta</span>
             </div>
             <div class="viewfinder-stage">
-              <div id="vf-frame" class="viewfinder-frame" data-scene="boardwalk" data-palette="sunset-coral" data-format="16:9" data-has-title="false" data-title-style="neon">
+              <div id="vf-frame" class="viewfinder-frame" data-scene="boardwalk" data-palette="sunset-coral" data-format="16:9" data-subject-pos="right" data-title-pos="left" data-has-title="false" data-title-style="neon">
                 <div id="vf-safe-zone" class="vf-safe-zone">Zona libre para título</div>
                 <svg class="vf-svg" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
                   <circle cx="160" cy="86" r="46" fill="rgba(255, 224, 150, 0.35)"/>
