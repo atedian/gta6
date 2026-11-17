@@ -1848,6 +1848,7 @@
       .step-card,
       .ratio-label,
       .style-label,
+      .variant-pill,
       .assist-chip,
       .btn-assist,
       .prompt-textarea,
@@ -1864,6 +1865,7 @@
 
       .segment-item input:checked + .segment-label,
       .segment-item input:checked + .style-label,
+      .segment-item input:checked + .variant-pill,
       .ratio-item input:checked + .ratio-label,
       .assist-chip[aria-pressed="true"],
       .step-card[open] {
@@ -2515,20 +2517,35 @@
       const DEFAULT_SUBJECT = 'Persona mirando a cámara con camisa hawaiana abierta y gafas de sol en el cuello';
       const DEFAULT_TITLE = 'NOCHES DE MIAMI';
 
+      const VARIANT_COPY = {
+        gta6: {
+          opening:
+            'Crea una ilustración con el estilo artístico oficial y exacto de portada de GTA 6 (Grand Theft Auto VI): arte digital pictórico semirrealista de estética tropical costera moderna, con contornos entintados limpios, pincelada marcada, sombras gráficas contrastadas y color cinematográfico vibrante.',
+          photo: (subject) =>
+            `Toma como referencia a la persona de la foto adjunta y mantenla completamente reconocible conservando fielmente sus facciones, peinado, expresión y tono de piel. Reinterprétala como personaje protagonista ilustrado exactamente al estilo oficial de GTA 6 (ilustración digital pintada a mano tipo carátula de GTA VI con líneas de tinta definidas, pincelada pictórica expresiva entre cómic semirrealista y gouache digital, sombreado cel-shaded contrastado e iluminación dramática de portada, sin aspecto de fotografía real ni render 3D). Sitúa a esa persona en la escena con esta apariencia y acción: ${subject}.`,
+          scratch: (subject) =>
+            `Ilustra la escena completa exactamente al estilo de arte promocional de portada de GTA 6 (Grand Theft Auto VI): pintura digital semirrealista pintada a mano con contornos entintados limpios, pincelada estilizada expresiva, sombreado gráfico contrastado e iluminación cinematográfica de portada costera, evitando el fotorrealismo crudo y el render 3D. Protagonista y acción principal: ${subject}.`
+        },
+        safe: {
+          opening:
+            'Crea una ilustración artística con estilo de portada oficial de videojuego moderno de acción tropical costera: arte digital pictórico semirrealista de estética contemporánea de Miami, con contornos entintados limpios, pincelada marcada, sombras gráficas contrastadas y color cinematográfico vibrante.',
+          photo: (subject) =>
+            `Toma como referencia a la persona de la foto adjunta y mantenla completamente reconocible conservando fielmente sus facciones, peinado, expresión y tono de piel. Reinterprétala como personaje protagonista ilustrado de carátula moderna de mundo abierto costero (ilustración digital pintada a mano con líneas de tinta definidas, pincelada pictórica expresiva entre cómic semirrealista y gouache digital, sombreado cel-shaded contrastado e iluminación dramática de portada, sin aspecto de fotografía real ni render 3D). Sitúa a esa persona en la escena con esta apariencia y acción: ${subject}.`,
+          scratch: (subject) =>
+            `Ilustra la escena completa con acabado de arte conceptual oficial de portada de acción urbana costera contemporánea: pintura digital semirrealista pintada a mano con contornos entintados limpios, pincelada estilizada expresiva, sombreado gráfico contrastado e iluminación tropical cálida, evitando el fotorrealismo crudo y el render 3D. Protagonista y acción principal: ${subject}.`
+        }
+      };
+
       const MODE_COPY = {
         photo: {
           label: 'Transformar mi foto',
           tag: 'Con foto adjunta',
-          hint: 'Mantiene reconocibles facciones, peinado, expresión y tono de piel de tu foto adjunta.',
-          prompt: (subject) =>
-            `Toma como referencia a la persona de la foto adjunta y mantenla completamente reconocible conservando fielmente sus facciones, peinado, expresión y tono de piel. Reinterprétala como una ilustración digital pintada a mano con contornos definidos y sombras gráficas, no como un filtro fotográfico ni render 3D. Sitúa a esa persona en la escena con esta apariencia y acción: ${subject}.`
+          hint: 'Mantiene reconocibles facciones, peinado, expresión y tono de piel de tu foto adjunta.'
         },
         scratch: {
           label: 'Crear imagen desde cero',
           tag: 'Desde cero',
-          hint: 'Genera personaje y escena completos desde cero sin pedir foto adjunta.',
-          prompt: (subject) =>
-            `Ilustra la escena completa como una ilustración digital pintada a mano con contornos definidos, pincelada estilizada y sombras gráficas marcadas, evitando el acabado de cámara real y el render 3D. Protagonista y acción principal: ${subject}.`
+          hint: 'Genera personaje y escena completos desde cero sin pedir foto adjunta.'
         }
       };
 
@@ -2743,6 +2760,7 @@
       const vfLabelEl = document.getElementById('vf-label');
       const vfModeTagEl = document.getElementById('vf-mode-tag');
       const outputEl = document.getElementById('prompt-output');
+      const variantSwitchEl = document.getElementById('variant-switch');
       const metaEl = document.getElementById('prompt-meta');
       const copyStatusEl = document.getElementById('copy-status');
 
@@ -2769,7 +2787,7 @@
       }
 
       function getSelectedValue(name, fallback) {
-        const checked = form.querySelector(`input[name="${name}"]:checked`);
+        const checked = document.querySelector(`input[name="${CSS.escape(name)}"]:checked`);
         return checked ? checked.value : fallback;
       }
 
@@ -2805,6 +2823,7 @@
 
       function buildPrompt() {
         const mode = getSelectedValue('mode', 'photo');
+        const variant = getSelectedValue('prompt-variant', 'gta6');
         const format = getSelectedValue('format', '16:9');
         const subjectPos = getSelectedValue('subject-pos', 'right');
         const textMode = getSelectedValue('text-mode', 'none');
@@ -2817,18 +2836,16 @@
         const hasTitle = textMode === 'title';
         const effectiveTitle = cleanTitle || DEFAULT_TITLE;
 
+        const variantConfig = VARIANT_COPY[variant] || VARIANT_COPY.gta6;
         const modeConfig = MODE_COPY[mode] || MODE_COPY.photo;
         const paletteConfig = PALETTE_PROMPTS[palette] || PALETTE_PROMPTS['sunset-coral'];
         const sceneText = SCENE_PROMPTS[scene] || SCENE_PROMPTS.boardwalk;
         const { formatText, titleZoneText } = describeFormatAndTitleZone(format, subjectPos, titlePos, hasTitle);
         const styleConfig = TITLE_STYLES[titleStyle] || TITLE_STYLES.neon;
 
-        const opening =
-          'Crea una imagen estilo ilustración cinematográfica tropical con estética ochentera y noventera de la costa de Miami, de acabado pictórico editorial, vibrante y expresivo.';
-
         const blocks = [
-          opening,
-          modeConfig.prompt(subject),
+          variantConfig.opening,
+          mode === 'scratch' ? variantConfig.scratch(subject) : variantConfig.photo(subject),
           sceneText,
           paletteConfig.text,
           formatText
@@ -3048,6 +3065,10 @@
       form.addEventListener('submit', (event) => {
         event.preventDefault();
       });
+
+      if (variantSwitchEl) {
+        variantSwitchEl.addEventListener('change', buildPrompt);
+      }
 
       form.addEventListener('input', (event) => {
         if (event.target === titleTextEl && textModeTitleRadio && titleTextEl.value.trim()) {

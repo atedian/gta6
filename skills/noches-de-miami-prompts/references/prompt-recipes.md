@@ -2,18 +2,20 @@
 
 Reference blocks synchronized with the interactive studio (`index.html`).
 
-## Opening Line (Fixed)
+## Opening & Technique Variants
 
-```text
-Crea una imagen estilo ilustración cinematográfica tropical con estética ochentera y noventera de la costa de Miami, de acabado pictórico editorial, vibrante y expresivo.
-```
+- **Direct GTA 6 variant (default):**
+  `Crea una ilustración con el estilo artístico oficial y exacto de portada de GTA 6 (Grand Theft Auto VI): arte digital pictórico semirrealista de estética tropical costera moderna, con contornos entintados limpios, pincelada marcada, sombras gráficas contrastadas y color cinematográfico vibrante.`
+- **No-copyright variant (anti-block):**
+  `Crea una ilustración artística con estilo de portada oficial de videojuego moderno de acción tropical costera: arte digital pictórico semirrealista de estética contemporánea de Miami, con contornos entintados limpios, pincelada marcada, sombras gráficas contrastadas y color cinematográfico vibrante.`
 
 ## Protagonist Templates
 
-- **Photo mode:**
-  `Toma como referencia a la persona de la foto adjunta y mantenla completamente reconocible conservando fielmente sus facciones, peinado, expresión y tono de piel. Reinterprétala como una ilustración digital pintada a mano con contornos definidos y sombras gráficas, no como un filtro fotográfico ni render 3D. Sitúa a esa persona en la escena con esta apariencia y acción: <SUBJECT>.`
-- **From-scratch mode:**
-  `Ilustra la escena completa como una ilustración digital pintada a mano con contornos definidos, pincelada estilizada y sombras gráficas marcadas, evitando el acabado de cámara real y el render 3D. Protagonista y acción principal: <SUBJECT>.`
+- **Photo mode (GTA 6):**
+  `Toma como referencia a la persona de la foto adjunta y mantenla completamente reconocible conservando fielmente sus facciones, peinado, expresión y tono de piel. Reinterprétala como personaje protagonista ilustrado exactamente al estilo oficial de GTA 6 (ilustración digital pintada a mano tipo carátula de GTA VI con líneas de tinta definidas, pincelada pictórica expresiva entre cómic semirrealista y gouache digital, sombreado cel-shaded contrastado e iluminación dramática de portada, sin aspecto de fotografía ni render 3D). Sitúa a esa persona en la escena con esta apariencia y acción: <SUBJECT>.`
+- **From-scratch mode (GTA 6):**
+  `Ilustra la escena completa exactamente al estilo de arte promocional de portada de GTA 6 (Grand Theft Auto VI): pintura digital semirrealista pintada a mano con contornos entintados limpios, pincelada estilizada expresiva, sombreado gráfico contrastado e iluminación cinematográfica de portada costera, evitando el fotorrealismo crudo y el render 3D. Protagonista y acción principal: <SUBJECT>.`
+- *(For the no-copyright fallback, swap explicit game titles for "carátula moderna de mundo abierto costero" / "arte conceptual oficial de portada de acción urbana costera contemporánea").*
 
 ## Scenes (`Escenario de fondo`)
 

@@ -18,7 +18,8 @@ Herramienta web para crear prompts listos para usar en cualquier IA generadora d
 4. **Incluye título o deja la escena limpia:**
    - **Sin texto:** mantiene el espacio libre para editar después y ordena no añadir letras ni marcas de agua.
    - **Añadir título o texto:** escribe tu titular (por ejemplo para YouTube o portadas), elige rotulación **Neón 80s**, **Cromo retro** o **Editorial** y decide si va a la **izquierda**, al **centro** o a la **derecha**, previsualizando todo en el monitor de encuadre.
-5. **Copia y genera:**
+5. **Elige versión del prompt, copia y genera:**
+   - Selecciona **Estilo GTA 6** para obtener la estética exacta de portada en herramientas como ChatGPT, o cambia con un clic a **Sin copyright** si algún generador estricto bloquea referencias comerciales.
    - Pulsa **Copiar prompt**, abre tu generador de imágenes preferido desde los accesos directos (adjuntando tu foto si elegiste *Transformar mi foto*), pega el texto y genera la imagen.
 
 ## Skill para agentes de IA

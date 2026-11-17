@@ -20,9 +20,9 @@ Craft clean, filter-safe Spanish prompts (or translate the visual specification 
    - **Transformar mi foto (Photo reference mode):** Preserve the attached person's exact facial features, hairstyle, expression, and skin tone. Explicitly specify a hand-painted digital illustration with clean ink contours and graphic shading, never a camera filter or 3D render.
    - **Crear imagen desde cero (From-scratch mode):** Describe the full protagonist, clothing, pose, and scene with zero mention of any attached photo.
 
-2. **Start softly without trademarks**
-   - Always begin gently and descriptively: *"Crea una imagen estilo ilustración cinematográfica tropical con estética ochentera y noventera de la costa de Miami, de acabado pictórico editorial, vibrante y expresivo."*
-   - Never name copyrighted games, studios, or third-party brands inside the prompt body.
+2. **Choose style precision vs filter-safe wording**
+   - **Direct GTA 6 style (default):** Anchor the model explicitly with *"estilo artístico oficial y exacto de portada de GTA 6 (Grand Theft Auto VI)"* plus its core technique (hand-painted semi-realistic digital painting, crisp ink linework, expressive brush strokes between realistic comic art and digital gouache, cel-shaded contrast shadows, and vibrant tropical cover lighting, avoiding raw photorealism and 3D render).
+   - **No-copyright fallback (anti-block):** If the user targets a strict generator that refuses game titles (e.g., Gemini or Adobe Firefly), omit `GTA 6` / `Grand Theft Auto VI` cleanly and describe the exact same modern coastal open-world cover illustration style (*"estilo de portada oficial de videojuego moderno de acción tropical costera, pintura digital semirrealista con contornos entintados limpios y sombreado cel-shaded"*).
 
 3. **Compose protagonist, scene, light, and framing**
    - Load [prompt-recipes.md](./references/prompt-recipes.md) for the exact visual blocks (4 coastal scenes, 3 color/light atmospheres, 3 framing ratios, subject placement options, and subject detail enhancers).
