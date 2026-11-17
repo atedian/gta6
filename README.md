@@ -14,10 +14,10 @@ Herramienta web para crear prompts listos para usar en cualquier IA generadora d
 3. **Personaliza escenario, paleta y formato:**
    - **Escenario de fondo:** paseo marítimo con palmeras al atardecer, calle con hoteles Art Déco y neón, deportivo clásico junto a la playa o azotea frente al skyline costero.
    - **Paleta y luz:** atardecer coral y magenta, noche de neón turquesa y violeta o sol tropical vibrante de mediodía.
-   - **Formato y composición:** `16:9` para miniatura de YouTube, `9:16` vertical o `1:1` cuadrado.
+   - **Formato y composición:** `16:9` para miniatura de YouTube, `9:16` vertical o `1:1` cuadrado, eligiendo además si el protagonista va a la **izquierda**, en el **centro** o a la **derecha**.
 4. **Incluye título o deja la escena limpia:**
    - **Sin texto:** mantiene el espacio libre para editar después y ordena no añadir letras ni marcas de agua.
-   - **Añadir título o texto:** escribe tu titular (por ejemplo para YouTube o portadas) y elige rotulación **Neón 80s**, **Cromo retro** o **Editorial**, previsualizando la colocación en el monitor de encuadre.
+   - **Añadir título o texto:** escribe tu titular (por ejemplo para YouTube o portadas), elige rotulación **Neón 80s**, **Cromo retro** o **Editorial** y decide si va a la **izquierda**, al **centro** o a la **derecha**, previsualizando todo en el monitor de encuadre.
 5. **Copia y genera:**
    - Pulsa **Copiar prompt**, abre tu generador de imágenes preferido desde los accesos directos (adjuntando tu foto si elegiste *Transformar mi foto*), pega el texto y genera la imagen.
 

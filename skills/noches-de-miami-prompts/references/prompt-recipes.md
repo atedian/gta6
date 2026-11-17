@@ -28,6 +28,11 @@ Crea una imagen estilo ilustración cinematográfica tropical con estética oche
 - **Noche de neón turquesa y violeta:** Noche de neón con iluminación en turquesa eléctrico, cian y violeta profundo, reflejos vibrantes de alto contraste en bordes y cielo nocturno púrpura oscuro.
 - **Sol tropical vibrante de mediodía:** Sol tropical vibrante de mediodía con cielo turquesa luminoso, colores saturados cálidos, brillos intensos y sombras gráficas nítidas.
 
+## Subject & Title Placement (`Izquierda / Centro / Derecha`)
+
+- **Subject positions:** `en el tercio izquierdo`, `en el centro del encuadre`, `en el tercio derecho` (default `derecha` on `16:9`, `centro` on `9:16` / `1:1`).
+- **Title positions:** place the label in `el tercio izquierdo despejado`, `la zona central superior`, or `el tercio derecho despejado`. If protagonist and title share the same side, place the title cleanly in the upper zone above the protagonist so the face stays clear.
+
 ## Title Lettering Styles (Optional)
 
 - **Neón 80s:** Rotulación tubular brillante estilo neón ochentero en cian eléctrico y magenta con halo luminoso definido.

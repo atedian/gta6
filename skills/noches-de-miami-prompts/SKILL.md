@@ -25,15 +25,15 @@ Craft clean, filter-safe Spanish prompts (or translate the visual specification 
    - Never name copyrighted games, studios, or third-party brands inside the prompt body.
 
 3. **Compose protagonist, scene, light, and framing**
-   - Load [prompt-recipes.md](./references/prompt-recipes.md) for the exact visual blocks (4 coastal scenes, 3 color/light atmospheres, 3 framing ratios, and subject detail enhancers).
-   - Align the subject placement with the aspect ratio:
-     - `16:9` (YouTube thumbnail): subject anchored in the right third with the left third open or carrying the title.
-     - `9:16` (Shorts / Reels / TikTok): centered vertical subject with generous upper breathing room.
-     - `1:1` (Square): balanced centered composition.
+   - Load [prompt-recipes.md](./references/prompt-recipes.md) for the exact visual blocks (4 coastal scenes, 3 color/light atmospheres, 3 framing ratios, subject placement options, and subject detail enhancers).
+   - Align the subject placement (`izquierda`, `centro`, or `derecha`) cleanly inside the chosen aspect ratio:
+     - `16:9` (YouTube thumbnail): protagonist in the chosen side or center (default `derecha`, opposite a clean or titled left third).
+     - `9:16` (Shorts / Reels / TikTok): vertical composition with generous upper breathing room (protagonist `izquierda`, `centro`, or `derecha`, default `centro`).
+     - `1:1` (Square): balanced composition with protagonist `izquierda`, `centro`, or `derecha`.
 
 4. **Handle titles and lettering explicitly**
-   - **No text (default for post-editing in Canva/Photoshop):** End strictly prohibiting any text, letters, numbers, titles, logos, or watermarks.
-   - **With YouTube title or custom lettering:** If the user supplies title text (e.g., `NOCHES DE MIAMI`), adapt the framing zone to hold the text cleanly (`left third` on `16:9`, `upper zone` on `9:16` and `1:1`), select a lettering treatment (`Neón 80s`, `Cromo retro`, or `Editorial`), and close by instructing the model to render **only** that exact quoted text with accurate spelling and no extra subtitles, invented letters, logos, or watermarks.
+   - **No text (default for post-editing in Canva/Photoshop):** Leave space free on the chosen side and end strictly prohibiting any text, letters, numbers, titles, logos, or watermarks.
+   - **With YouTube title or custom lettering:** Place the exact quoted text (`«...»`) in the chosen side (`izquierda`, `centro`, or `derecha`) aligned cleanly without overlapping the protagonist's face, choose a lettering style (`Neón 80s`, `Cromo retro`, or `Editorial`), and close instructing the model to render **only** that text with accurate spelling and no extra subtitles, invented letters, logos, or watermarks.
 
 5. **Deliver cleanly**
    - Return the ready-to-paste prompt in a single fenced block so the user can copy it into ChatGPT, Gemini, Grok, Midjourney, Flux, Ideogram, Recraft, or Adobe Firefly.

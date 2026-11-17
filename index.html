@@ -2203,8 +2203,7 @@
                     class="text-input text-input-line"
                     maxlength="60"
                     placeholder="Ej. NOCHES DE MIAMI"
-                    enterkeyhint="done"
-                    aria-describedby="title-hint">
+                    enterkeyhint="done">
                 </div>
 
                 <div>
@@ -2559,22 +2558,22 @@
         '1:1': '1:1 Cuadrado'
       };
 
-      const FORMAT_PROMPTS_NO_TEXT = {
-        '16:9':
-          'Formato y composición: encuadre panorámico 16:9 pensado para miniatura, con el sujeto principal ubicado en el tercio derecho y espacio limpio, despejado y atmosférico en el lado izquierdo para añadir un título después en edición.',
-        '9:16':
-          'Formato y composición: encuadre vertical 9:16 optimizado para pantalla vertical, con el sujeto centrado y aire limpio suficiente en la parte superior.',
-        '1:1':
-          'Formato y composición: encuadre cuadrado 1:1, equilibrado y centrado alrededor del protagonista y su entorno tropical.'
+      const POS_LABELS = {
+        left: 'Izquierda',
+        center: 'Centro',
+        right: 'Derecha'
       };
 
-      const FORMAT_PROMPTS_WITH_TEXT = {
-        '16:9':
-          'Formato y composición: encuadre panorámico 16:9 pensado para miniatura de YouTube, con el sujeto principal ubicado en el tercio derecho y el rótulo tipográfico integrado con fuerza visual en el tercio izquierdo despejado.',
-        '9:16':
-          'Formato y composición: encuadre vertical 9:16 optimizado para Shorts, Reels y TikTok, con el protagonista situado ligeramente más abajo y amplio aire superior reservado para integrar el título.',
-        '1:1':
-          'Formato y composición: encuadre cuadrado 1:1 equilibrado alrededor del protagonista, dejando una franja superior limpia y legible para el rótulo.'
+      const SUBJECT_POS_PHRASES = {
+        left: 'ubicado en el tercio izquierdo',
+        center: 'situado en el centro del encuadre',
+        right: 'ubicado en el tercio derecho'
+      };
+
+      const FREE_SIDE_PHRASES = {
+        left: 'dejando el tercio izquierdo limpio y atmosférico para añadir un título después en edición',
+        center: 'dejando aire limpio en la zona superior para añadir un título después en edición',
+        right: 'dejando el tercio derecho limpio y atmosférico para añadir un título después en edición'
       };
 
       const TITLE_STYLES = {
@@ -2592,11 +2591,53 @@
         }
       };
 
-      const TITLE_ZONES = {
-        '16:9': 'el tercio izquierdo despejado frente al protagonista',
-        '9:16': 'la zona superior despejada encima del sujeto',
-        '1:1': 'la banda superior equilibrada sin cubrir el rostro ni el foco principal'
-      };
+      function describeFormatAndTitleZone(format, subjectPos, titlePos, hasTitle) {
+        const subjectText = SUBJECT_POS_PHRASES[subjectPos] || SUBJECT_POS_PHRASES.right;
+        const formatHeader = {
+          '16:9': 'encuadre panorámico 16:9 pensado para miniatura de YouTube',
+          '9:16': 'encuadre vertical 9:16 optimizado para Shorts, Reels y TikTok',
+          '1:1': 'encuadre cuadrado 1:1 equilibrado'
+        }[format] || 'encuadre panorámico 16:9';
+
+        if (!hasTitle) {
+          if (format === '16:9') {
+            const freeText = FREE_SIDE_PHRASES[titlePos] || FREE_SIDE_PHRASES.left;
+            return {
+              formatText: `Formato y composición: ${formatHeader}, con el sujeto principal ${subjectText} y ${freeText}.`,
+              titleZoneText: ''
+            };
+          }
+          return {
+            formatText: `Formato y composición: ${formatHeader}, con el protagonista ${subjectText} y aire superior limpio dentro de la escena tropical.`,
+            titleZoneText: ''
+          };
+        }
+
+        let titleZoneText;
+        if (format === '16:9') {
+          if (subjectPos === titlePos) {
+            const alignedSide = titlePos === 'center' ? 'centrada' : titlePos === 'left' ? 'izquierda' : 'derecha';
+            titleZoneText = `la parte superior ${alignedSide}, claramente por encima del protagonista sin tapar el rostro`;
+          } else {
+            titleZoneText = {
+              left: 'el tercio izquierdo despejado frente al protagonista',
+              center: 'la zona central superior con fondo limpio de contraste',
+              right: 'el tercio derecho despejado frente al protagonista'
+            }[titlePos];
+          }
+        } else {
+          titleZoneText = {
+            left: 'la esquina superior izquierda con margen limpio',
+            center: 'la parte superior centrada encima del protagonista',
+            right: 'la esquina superior derecha con margen limpio'
+          }[titlePos];
+        }
+
+        return {
+          formatText: `Formato y composición: ${formatHeader}, con el sujeto principal ${subjectText} equilibrando la escena para destacar el rótulo en ${titleZoneText}.`,
+          titleZoneText
+        };
+      }
 
       const form = document.getElementById('prompt-form');
       const steps = Array.from(form.querySelectorAll('details.step-card'));
@@ -2632,6 +2673,8 @@
       let advanceTimer = null;
       let pointerActivatedControl = false;
       let lastIdeaIndex = -1;
+      let userPickedSubjectPos = false;
+      let userPickedTitlePos = false;
 
       /* Exclusive details fallback for older browsers without details[name] */
       if (!Object.hasOwn(HTMLDetailsElement.prototype, 'name')) {
@@ -2679,11 +2722,18 @@
         }
       }
 
+      function setRadioValue(name, value) {
+        const target = form.querySelector(`input[name="${name}"][value="${CSS.escape(value)}"]`);
+        if (target) target.checked = true;
+      }
+
       function buildPrompt() {
         const mode = getSelectedValue('mode', 'photo');
         const format = getSelectedValue('format', '16:9');
+        const subjectPos = getSelectedValue('subject-pos', 'right');
         const textMode = getSelectedValue('text-mode', 'none');
         const titleStyle = getSelectedValue('title-style', 'neon');
+        const titlePos = getSelectedValue('title-pos', 'left');
         const scene = sceneEl.value;
         const palette = paletteEl.value;
         const subject = normalizeSubject(subjectEl.value);
@@ -2694,8 +2744,7 @@
         const modeConfig = MODE_COPY[mode] || MODE_COPY.photo;
         const paletteConfig = PALETTE_PROMPTS[palette] || PALETTE_PROMPTS['sunset-coral'];
         const sceneText = SCENE_PROMPTS[scene] || SCENE_PROMPTS.boardwalk;
-        const formatMap = hasTitle ? FORMAT_PROMPTS_WITH_TEXT : FORMAT_PROMPTS_NO_TEXT;
-        const formatText = formatMap[format] || formatMap['16:9'];
+        const { formatText, titleZoneText } = describeFormatAndTitleZone(format, subjectPos, titlePos, hasTitle);
         const styleConfig = TITLE_STYLES[titleStyle] || TITLE_STYLES.neon;
 
         const opening =
@@ -2710,9 +2759,8 @@
         ];
 
         if (hasTitle) {
-          const zoneText = TITLE_ZONES[format] || TITLE_ZONES['16:9'];
           blocks.push(
-            `Texto y tipografía integrados: incluye exactamente el texto «${effectiveTitle}» colocado en ${zoneText}, con ${styleConfig.prompt}, ortografía impecable, trazos definidos y lectura clara a distancia.`
+            `Texto y tipografía integrados: incluye exactamente el texto «${effectiveTitle}» colocado en ${titleZoneText}, con ${styleConfig.prompt}, ortografía impecable, trazos definidos y lectura clara a distancia.`
           );
           blocks.push(
             `Regla final imprescindible: renderiza únicamente el texto indicado («${effectiveTitle}») con ortografía exacta y no añadas subtítulos extra, palabras inventadas, logotipos ni marcas de agua.`
@@ -2734,8 +2782,10 @@
         previewSceneEl.textContent = getSelectedOptionLabel(sceneEl);
         previewPaletteEl.textContent = getSelectedOptionLabel(paletteEl);
         previewPaletteSwatchEl.dataset.palette = palette;
-        previewFormatEl.textContent = FORMAT_LABELS[format] || format;
-        previewTitleEl.textContent = hasTitle ? `«${effectiveTitle}» (${styleConfig.label})` : 'Sin texto (solo imagen)';
+        previewFormatEl.textContent = `${FORMAT_LABELS[format] || format}, ${POS_LABELS[subjectPos] || 'Derecha'}`;
+        previewTitleEl.textContent = hasTitle
+          ? `«${effectiveTitle}» (${styleConfig.label}, ${POS_LABELS[titlePos] || 'Izquierda'})`
+          : 'Sin texto (solo imagen)';
 
         syncTraitChips(subject);
 
@@ -2745,6 +2795,8 @@
         vfFrameEl.dataset.scene = scene;
         vfFrameEl.dataset.palette = palette;
         vfFrameEl.dataset.format = format;
+        vfFrameEl.dataset.subjectPos = subjectPos;
+        vfFrameEl.dataset.titlePos = titlePos;
         vfFrameEl.dataset.hasTitle = hasTitle ? 'true' : 'false';
         vfFrameEl.dataset.titleStyle = titleStyle;
         vfSafeZoneEl.textContent = hasTitle ? effectiveTitle : 'Zona libre para título';
@@ -2963,8 +3015,27 @@
 
       form.addEventListener('change', (event) => {
         const target = event.target;
-        if (target instanceof HTMLInputElement && target.name === 'title-style' && textModeTitleRadio) {
-          textModeTitleRadio.checked = true;
+        if (target instanceof HTMLInputElement) {
+          if (target.name === 'format') {
+            if (!userPickedSubjectPos) {
+              setRadioValue('subject-pos', target.value === '16:9' ? 'right' : 'center');
+            }
+            if (!userPickedTitlePos) {
+              setRadioValue('title-pos', target.value === '16:9' ? 'left' : 'center');
+            }
+          } else if (target.name === 'subject-pos') {
+            userPickedSubjectPos = true;
+            if (!userPickedTitlePos) {
+              if (target.value === 'left') setRadioValue('title-pos', 'right');
+              else if (target.value === 'right') setRadioValue('title-pos', 'left');
+              else setRadioValue('title-pos', 'center');
+            }
+          } else if (target.name === 'title-pos') {
+            userPickedTitlePos = true;
+            if (textModeTitleRadio) textModeTitleRadio.checked = true;
+          } else if (target.name === 'title-style' && textModeTitleRadio) {
+            textModeTitleRadio.checked = true;
+          }
         }
         buildPrompt();
         if (!(target instanceof HTMLElement)) return;
@@ -2972,18 +3043,23 @@
         if (!stepCard) return;
 
         const stepNum = Number(stepCard.dataset.step);
-        if ((stepNum === 1 || stepNum === 5) && pointerActivatedControl) {
-          completeStep(stepNum, 200);
+        if (stepNum === 1 && pointerActivatedControl) {
+          completeStep(1, 200);
         } else if (stepNum === 3 || stepNum === 4) {
           completeStep(stepNum, 200);
+        } else if (stepNum === 5) {
+          stepCard.dataset.done = 'true';
+          if (target instanceof HTMLInputElement && target.name === 'subject-pos' && pointerActivatedControl) {
+            completeStep(5, 200);
+          }
         } else if (stepNum === 6) {
           stepCard.dataset.done = 'true';
         }
       });
 
-      /* Clicking an already-selected mode/format option via pointer still completes and advances cleanly */
+      /* Clicking an already-selected mode/subject-pos option via pointer advances cleanly */
       attachAlreadyCheckedAdvance('#step-1 .segment-label', 1, 180);
-      attachAlreadyCheckedAdvance('#step-5 .ratio-label', 5, 180);
+      attachAlreadyCheckedAdvance('#step-5 .style-label', 5, 180);
 
       attachImeSafeEnter(subjectEl, () => completeStep(2, 60));
       attachImeSafeEnter(titleTextEl, () => {
@@ -3017,6 +3093,10 @@
 
       form.querySelectorAll('#step-6 .style-label').forEach((label) => {
         label.addEventListener('click', () => {
+          const forAttr = label.getAttribute('for') || '';
+          if (forAttr.startsWith('title-pos-')) {
+            userPickedTitlePos = true;
+          }
           if (textModeTitleRadio && !textModeTitleRadio.checked) {
             textModeTitleRadio.checked = true;
             const step6 = document.getElementById('step-6');
